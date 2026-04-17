@@ -14,7 +14,7 @@ Escape_Game = (
   titre VARCHAR(255),
   duree INT,
   difficulte ENUM(1,2,3,4,5),
-  nb_joueurs ENUM(2,3,4,5,6,7,8),
+  nb_joueurs varchar(255),
   prix DECIMAL(10,2),
   localisation ENUM('domicile','Paris','Lille','Lyon'),
   theme VARCHAR(255),
