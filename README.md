@@ -1,16 +1,33 @@
-# React + Vite
+-Description:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ce projet est une application web développée avec React qui permet de gérer des escape games, que ce soit à domicile ou sur site.
+L’objectif est de proposer une plateforme simple pour organiser, consulter et potentiellement gérer des sessions d’escape game.
+Technologies utilisées
+React
+Vite
+JavaScript
+HTML / CSS
 
-Currently, two official plugins are available:
+-Installation et lancement
+Cloner le projet :
+git clone https://github.com/gitdreadeurz/Escape-games-project.git
+Aller dans le dossier :
+cd Escape-games-project
+Installer les dépendances :
+npm install
+Lancer le serveur de développement :
+npm run dev
+Ouvrir dans le navigateur :
+http://localhost:5173
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-Structure du projet
+Escape-games-project/
+│── public/
+│── src/
+│   ├── assets/
+│   ├── App.jsx
+│   ├── main.jsx
+│   ├── App.css
+│   └── index.css
+│── package.json
+│── README.md
