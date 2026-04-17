@@ -11,6 +11,7 @@ app.use(express.json());
 app.use('/user', userRoute);
 app.use('/options', optionRoute);
 app.use('/avis', avisRoute);
+app.use('/games', escapeRoute);
 
 app.listen(port,()=>{
     console.log(`Serveur express demarre sur http://localhost:${port}`);
