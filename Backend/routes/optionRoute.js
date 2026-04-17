@@ -1,12 +1,12 @@
 import express from 'express';
-import { createOptionController, getAllOptionsController, getOptionByIdController, updateOptionController, deleteOptionController } from '../controllers/OptionController.js';
+import { createOptionController, getAllOptionsController, getOptionByIdController, updateOptionController, deleteOptionController } from '../controllers/optionController.js';
 
 const router = express.Router();
 
-router.post('/nouveau', createOptionController);
-router.get('/liste', getAllOptionsController);
+router.post('/', createOptionController);
+router.get('/', getAllOptionsController);
 router.get('/:id', getOptionByIdController);
-router.put('/modif/:id', updateOptionController);
-router.delete('/sup/:id', deleteOptionController);
+router.put('/:id', updateOptionController);
+router.delete('/:id', deleteOptionController);
 
 export default router;
