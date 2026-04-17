@@ -1,0 +1,61 @@
+User = (
+  user_id COUNTER,
+  nom VARCHAR(255),
+  prenom VARCHAR(255),
+  role ENUM('superadmin','admin','client'),
+  telephone CHAR(10),
+  mot_de_passe VARCHAR(255),
+  date_inscription DATETIME,
+  date_anniv DATE
+);
+
+Escape_Game = (
+  game_id COUNTER,
+  titre VARCHAR(255),
+  duree INT,
+  difficulte ENUM(1,2,3,4,5),
+  nb_joueurs ENUM(2,3,4,5,6,7,8),
+  prix DECIMAL(10,2),
+  localisation ENUM('domicile','Paris','Lille','Lyon'),
+  theme VARCHAR(255),
+  disponible BOOLEAN
+);
+
+Option = (
+  option_id COUNTER,
+  libelle VARCHAR(255),
+  prix DECIMAL(10,2)
+);
+
+Reservation = (
+  reservation_id COUNTER,
+  date_reservation DATETIME,
+  creneau DATETIME,
+  statut ENUM('en_attente','confirmee','annulee'),
+  #user_id,
+  #game_id
+);
+
+Paiement = (
+  paiement_id COUNTER,
+  montant DECIMAL(10,2),
+  mode_paiement ENUM('stripe','paypal','applepay','googlepay'),
+  promo INT,
+  statut ENUM('confirmee','annulee'),
+  #reservation_id
+);
+
+Avis = (
+  avis_id COUNTER,
+  notation ENUM(1,2,3,4,5),
+  commentaire TEXT,
+  photo VARCHAR(255),
+  #user_id,
+  #game_id
+);
+
+LigneOption = (
+  ligne_id COUNTER,
+  #game_id,
+  #option_id
+);
