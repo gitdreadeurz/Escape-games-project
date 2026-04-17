@@ -3,10 +3,10 @@ import express from 'express';
 
 const router = express.Router();
 
-router.post('/user', newUser);
-router.get('/users', listUsers);
-router.get('/user/:id', userById);
-router.put('/user/:id', updateUser);
-router.delete('/user/:id', deleteUser);
+router.post('/', newUser);
+router.get('/', listUsers);
+router.get('/:id', userById);
+router.put('/:id', updateUser);
+router.delete('/:id', deleteUser);
 
 export default router;
