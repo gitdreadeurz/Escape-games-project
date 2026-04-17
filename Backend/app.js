@@ -1,13 +1,13 @@
 import express from "express";
 import optionRoute from './routes/optionRoute.js';
-
+import userRoutes from './routes/userRoute.js';
 
 const app = express();
 const port =3000;
 
 app.use(express.json());
-app.use(userRoutes);
 
+app.use('/user', userRoutes);
 app.use('/options', optionRoute);
 
 app.listen(port,()=>{

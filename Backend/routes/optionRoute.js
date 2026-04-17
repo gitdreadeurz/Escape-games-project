@@ -3,10 +3,10 @@ import { createOptionController, getAllOptionsController, getOptionByIdControlle
 
 const router = express.Router();
 
-router.post('/new', createOptionController);
-router.get('/list', getAllOptionsController);
+router.post('/', createOptionController);
+router.get('/', getAllOptionsController);
 router.get('/:id', getOptionByIdController);
-router.put('/update/:id', updateOptionController);
-router.delete('/delete/:id', deleteOptionController);
+router.put('/:id', updateOptionController);
+router.delete('/:id', deleteOptionController);
 
 export default router;
