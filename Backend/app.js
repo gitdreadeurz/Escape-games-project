@@ -2,7 +2,6 @@ import express from "express";
 import optionRoute from './routes/optionRoute.js';
 import userRoute from './routes/userRoute.js';
 import avisRoute from './routes/avisRoute.js'
-import escapeRoute from './routes/escapeRoute.js';
 
 const app = express();
 const port =3000;
