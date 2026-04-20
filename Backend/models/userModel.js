@@ -18,6 +18,12 @@ export async function getUserById(user_id) {
     return result;
 }
 
+export async function getUserByEmail(mail) {
+    const select = "SELECT * FROM Utilisateur WHERE mail = ?";
+    const [result] = await connection.query(select, [mail]);
+    return result;
+}
+
 export async function updateUser(user_id, nom, prenom, role, telephone, mail, mot_de_passe, date_inscription, date_anniv) {
     const update = "UPDATE Utilisateur SET nom = ?, prenom = ?, role = ?, telephone = ?, mail = ?, mot_de_passe = ?, date_inscription = ?, date_anniv = ? WHERE user_id = ?";
     const [result] = await connection.query(update, [nom, prenom, role, telephone, mail, mot_de_passe, date_inscription, date_anniv, user_id]);
