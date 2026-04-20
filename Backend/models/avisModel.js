@@ -1,4 +1,4 @@
-import { connection } from "../config/db";
+import { connection } from "../config/db.js";
 
 export async function addAvis(notation, commentaire, photo, user_id, game_id) {
     const add = `INSERT INTO Avis (notation, commentaire, photo, user_id, game_id) VALUE (?, ?, ?, ?);`;

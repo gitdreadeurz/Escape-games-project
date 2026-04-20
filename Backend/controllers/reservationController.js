@@ -1,4 +1,4 @@
-import { createReservationModel, deleteReservationModel, listReservationModel, reservationByIdModel, updateReservationModel } from "../models/reservationModel";
+import { createReservationModel, deleteReservationModel, listReservationModel, reservationByIdModel, updateReservationModel } from "../models/reservationModel.js";
 
 //CREATE
 export async function createReservationController(req, res) {

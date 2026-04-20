@@ -1,4 +1,4 @@
-import { createGame,listGames, getGame, editGame, removeGame} from "../controllers/escapeController";
+import { createGame,listGames, getGame, editGame, removeGame} from "../controllers/escapeController.js";
 import express from "express";
 
 const router = express.Router();

@@ -1,4 +1,4 @@
-import { newPayment, getPayments, getPaymentById, updatePayment, deletePayment } from "../models/paiementModel";
+import { newPayment, getPayments, getPaymentById, updatePayment, deletePayment } from "../models/paiementModel.js";
 
 
 // Nouveau paiement
