@@ -9,12 +9,12 @@ export async function createReservationModel(date_reservation, creneau, statut, 
 
 //READ
 export async function listReservationModel() {
-    const list = "SELECT * FROM reservation r JOIN user u ON r.user_id = u.user_id JOIN escape_game eg ON r.game_id = eg.game_id";
+    const list = "SELECT * FROM reservation r JOIN utilisateur u ON r.user_id = u.user_id JOIN escape_game eg ON r.game_id = eg.game_id";
     const [result] = await connection.query(list);
     return result;
 }
 export async function reservationByIdModel(reservation_id) {
-    const reservationById = "SELECT * FROM reservation r JOIN user u ON r.user_id = u.user_id JOIN escape_game eg ON r.game_id = eg.game_id WHERE r.reservation_id = ?";
+    const reservationById = "SELECT * FROM reservation r JOIN utilisateur u ON r.user_id = u.user_id JOIN escape_game eg ON r.game_id = eg.game_id WHERE r.reservation_id = ?";
     const [result] = await connection.query(reservationById, [reservation_id]);
     return result;
 }

@@ -9,12 +9,12 @@ export async function addLigneOption(game_id, option_id) {
 
 //READ
 export async function listLigneOptionsModel() {
-    const list = "SELECT * FROM LigneOption l JOIN option o ON l.option_id = o.option_id JOIN escape_game eg ON l.game_id = eg.game_id;";
+    const list = "SELECT * FROM LigneOption l JOIN options o ON l.option_id = o.option_id JOIN escape_game eg ON l.game_id = eg.game_id;";
     const [result] = await connection.query(list);
     return result;
 }
 export async function ligneOptionByIdModel(id) {
-    const ligneOptionById = "SELECT * FROM LigneOption l JOIN option o ON l.option_id = o.option_id JOIN escape_game eg ON l.game_id = eg.game_id WHERE ligne_id = ?;";
+    const ligneOptionById = "SELECT * FROM LigneOption l JOIN options o ON l.option_id = o.option_id JOIN escape_game eg ON l.game_id = eg.game_id WHERE ligne_id = ?;";
     const [result] = await connection.query(ligneOptionById, [id]);
     return result;
 }
