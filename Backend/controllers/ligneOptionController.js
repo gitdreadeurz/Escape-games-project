@@ -3,9 +3,9 @@ import { addLigneOption, deleteLigneOptionModel, ligneOptionByIdModel, listLigne
 //CREATE
 export async function createLigneOptionController(req, res) {
     try {
-        const gameId = req.body.gameId;
-                    const optionId = req.body.optionId;
-                    const result = await addLigneOption(gameId, optionId)
+        const gameId = req.body.game_id;
+        const optionId = req.body.option_id;
+        const result = await addLigneOption(gameId, optionId)
         res.status(201).json(result)
     } catch (error) {
         res.status(500).json({ error: 'Erreur lors de la création de la ligne option' });
