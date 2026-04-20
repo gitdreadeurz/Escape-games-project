@@ -1,8 +1,8 @@
 import { connection } from "../config/db.js";
 
-export async function addUser(nom, prenom, role, telephone, mot_de_passe, date_inscription, date_anniv) {
-    const add = "INSERT INTO Utilisateur (nom, prenom, role, telephone, mot_de_passe, date_inscription, date_anniv) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    const result = await connection.query(add, [nom, prenom, role, telephone, mot_de_passe, date_inscription, date_anniv]);
+export async function addUser(nom, prenom, role, telephone, mail, mot_de_passe, date_inscription, date_anniv) {
+    const add = "INSERT INTO Utilisateur (nom, prenom, role, telephone, mail, mot_de_passe, date_inscription, date_anniv) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    const result = await connection.query(add, [nom, prenom, role, telephone, mail, mot_de_passe, date_inscription, date_anniv]);
     return result;
 }
 
