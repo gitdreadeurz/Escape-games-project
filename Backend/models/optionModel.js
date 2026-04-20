@@ -25,7 +25,7 @@ export async function updateOptionModel(libelle,prix,id){
 }
 //DELETE
 export async function deleteOptionModel(id){
-    const del = "DELETE FROM option WHERE option_id = ?"
+    const del = "DELETE FROM options WHERE option_id = ?"
     const [result] = await connection.query(del, [id])
     return result
 }
