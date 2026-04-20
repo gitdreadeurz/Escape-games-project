@@ -6,11 +6,13 @@ import userRoute from './routes/userRoute.js';
 import avisRoute from './routes/avisRoute.js';
 import reservationRoute from './routes/reservationRoute.js';
 import ligneOptionRoute from './routes/ligneOptionRoute.js';
+import authRoute from './routes/authRoute.js';
 
 const app = express();
 const port =3000;
 
 app.use(express.json());
+app.use('/auth', authRoute);
 
 app.use('/user', userRoute);
 app.use('/options', optionRoute);
