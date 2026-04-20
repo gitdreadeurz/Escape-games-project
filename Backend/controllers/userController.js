@@ -1,4 +1,4 @@
-import { addUser, getAllUsers, getUserById, updateUser, deleteUser } from "../models/userModel";
+import { addUser, getAllUsers, getUserById, updateUser, deleteUser } from "../models/userModel.js";
 
 export async function newUser(req, res) {
     try {
@@ -32,7 +32,7 @@ export async function userById(req, res) {
     }
 }
 
-export async function updateUser(req, res) {
+export async function updUser(req, res) {
     try {
         const { id } = req.params;
         const { nom, prenom, role, telephone, mot_de_passe, date_inscription, date_anniv } = req.body;
@@ -44,7 +44,7 @@ export async function updateUser(req, res) {
     }
 }
 
-export async function deleteUser(req, res) {
+export async function delUser(req, res) {
     try {
         const { id } = req.params;
         const user = await deleteUser(id);

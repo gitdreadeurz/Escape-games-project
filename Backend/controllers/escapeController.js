@@ -1,4 +1,4 @@
-import { addGame, getAllGames, getGameById, updateGame, deleteGame } from "../models/escapeModel";
+import { addGame, getAllGames, getGameById, updateGame, deleteGame } from "../models/escapeModel.js";
 
 // CREATE
 

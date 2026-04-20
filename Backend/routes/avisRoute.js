@@ -1,4 +1,4 @@
-import { newAvis, listAvis, avisById, updAvis, delAvis } from "../controllers/avisController";
+import { newAvis, listAvis, avisById, updAvis, delAvis } from "../controllers/avisController.js";
 import express from 'express'
 
 const router = express.Router();

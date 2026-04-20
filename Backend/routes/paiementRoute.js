@@ -1,4 +1,4 @@
-import { createPayment, allPayments, getPayment, editPayment, removePayment } from "../controllers/paiementController";
+import { createPayment, allPayments, getPayment, editPayment, removePayment } from "../controllers/paiementController.js";
 
 import express from "express";
 

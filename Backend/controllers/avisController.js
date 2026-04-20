@@ -1,4 +1,4 @@
- import { addAvis, getAllAvis, getAvisById, updateAvis, deleteAvis } from "../models/avisModel";
+ import { addAvis, getAllAvis, getAvisById, updateAvis, deleteAvis } from "../models/avisModel.js";
 
  export async function newAvis(req, res) {
     try {
