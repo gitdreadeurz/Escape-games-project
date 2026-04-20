@@ -5,18 +5,18 @@ import express from "express";
 const router = express.Router();
 
 // Tous les paiements
-router.get("/all",allPayments);
+router.get("/",allPayments);
 
 // Paiement par id
 router.get("/:paiement_id", getPayment);
 
 // Ajouter nouveau paiement
-router.post("/add", createPayment);
+router.post("/", createPayment);
 
 // Update un paiement
-router.put("/edit/:paiement_id",editPayment);
+router.put("/:paiement_id",editPayment);
 
 // Supprimer un paiement
-router.delete("/delete/:paiement_id",removePayment);
+router.delete("/:paiement_id",removePayment);
 
 export default router;

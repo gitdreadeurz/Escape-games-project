@@ -5,25 +5,31 @@ import { newPayment, getPayments, getPaymentById, updatePayment, deletePayment }
 export async function createPayment(req, res) {
     try {
         const montant = req.body.montant;
-        const monde_paiement = req.body.monde_paiement;
+        const mode_paiement = req.body.mode_paiement; 
         const promo = req.body.promo;
         const statut = req.body.statut;
         const reservation_id = req.body.reservation_id;
 
-        const payment = await newPayment(montant, monde_paiement, promo, statut, reservation_id);
-        res.json(payment)
+        const payment = await newPayment(
+            montant,
+            mode_paiement,
+            promo,
+            statut,
+            reservation_id
+        );
+
+        res.json(payment);
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "erreur serveur" })
+        res.status(500).json({ error: "erreur serveur" });
     }
-
 }
 
 // Tous les paiements
 export async function allPayments(req, res) {
     try {
-        const payment = getPayments();
+        const payment = await getPayments();
         res.json(payment);
 
     } catch (error) {
@@ -52,19 +58,26 @@ export async function editPayment(req, res) {
     try {
         const paiement_id = req.params.paiement_id;
         const montant = req.body.montant;
-        const monde_paiement = req.body.monde_paiement;
+        const mode_paiement = req.body.mode_paiement;
         const promo = req.body.promo;
         const statut = req.body.statut;
         const reservation_id = req.body.reservation_id;
 
-        const payment = await updatePayment(paiement_id, montant, monde_paiement, promo, statut, reservation_id);
+        const payment = await updatePayment(
+            montant,
+            mode_paiement,
+            promo,
+            statut,
+            reservation_id,
+            paiement_id
+        );
+
         res.json(payment);
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "erreur serveur" })
+        res.status(500).json({ error: "erreur serveur" });
     }
-
 }
 
 // Supprimer paiement
