@@ -1,4 +1,4 @@
-import { createOptionModel, deleteOptionModel, listOptionModel, optionByIdModel, updateOptionModel } from "../models/OptionModel.js";
+import { createOptionModel, deleteOptionModel, listOptionModel, optionByIdModel, updateOptionModel } from "../models/optionModel.js";
 
 //CREATE
 export async function createOptionController(req, res) {
