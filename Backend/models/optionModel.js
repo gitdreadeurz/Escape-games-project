@@ -2,7 +2,7 @@ import {connection} from "../config/db.js"
 
 //CREATE
 export async function createOptionModel(libelle,prix){
-    const create = "INSERT into option (libelle, prix) values (?,?)"
+    const create = "INSERT into options (libelle, prix) values (?,?)"
     const [result]= await connection.query(create, [libelle,prix])
     return result
 }

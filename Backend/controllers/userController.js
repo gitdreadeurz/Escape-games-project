@@ -2,8 +2,8 @@ import { addUser, getAllUsers, getUserById, updateUser, deleteUser } from "../mo
 
 export async function newUser(req, res) {
     try {
-        const {nom, prenom, email, mot_de_passe, date_inscription, date_anniv} = req.body;
-        const user = await addUser(nom, prenom, email, mot_de_passe, date_inscription, date_anniv);
+        const {nom, prenom, role, telephone, mot_de_passe, date_inscription, date_anniv} = req.body;
+        const user = await addUser(nom, prenom, role, telephone, mot_de_passe, date_inscription, date_anniv);
         res.status(201).json(user);
     } catch (error) {
         console.error(error);
