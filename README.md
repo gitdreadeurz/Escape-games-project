@@ -31,3 +31,23 @@ Escape-games-project/
 │   └── index.css
 │── package.json
 │── README.md
+
+
+
+PHP My Admin
+
+
+ nom de domaine : 
+
+foreach.whf.bz
+
+
+bdd
+
+
+bdd url : https://cloud3.googiehost.com/phpMyAdmin/index.php?route=/&lang=fr
+
+host : localhost
+database : ktwdojhw_escape
+username : ktwdojhw_escape
+password : gTGSkXQBTc4GHgtqH2by
