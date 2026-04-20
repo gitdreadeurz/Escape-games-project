@@ -1,0 +1,27 @@
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
+export function authMiddleware(req, res, next) {
+
+    const header = req.headers.authorization;
+    if (!header) {
+        return res.status(401).json({error: 'Token manquant'});
+    }
+
+    const [type, token] = header.split(' ');
+    if (type !== 'Bearer' || !token) {
+        return res.status(401).json({error: 'Format de token invalide'});
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        return res.status(401).json({error: 'Token invalide ou expiré'})
+    }
+}
