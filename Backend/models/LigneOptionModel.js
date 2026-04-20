@@ -1,4 +1,4 @@
-import { connection } from "../config/db";
+import { connection } from "../config/db.js";
 
 //CREATE
 export async function addLigneOption(game_id, option_id) {
