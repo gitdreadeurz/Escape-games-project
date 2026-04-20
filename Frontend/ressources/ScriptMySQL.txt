@@ -1,12 +1,13 @@
 -- ========================
--- TABLE: User
+-- TABLE: Utilisateur
 -- ========================
-CREATE TABLE User (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Utilisateur (
+    user_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     nom VARCHAR(255),
     prenom VARCHAR(255),
     role ENUM('superadmin','admin','client'),
-    telephone CHAR(10),
+    telephone VARCHAR(10),
+    mail VARCHAR(255),
     mot_de_passe VARCHAR(255),
     date_inscription DATETIME,
     date_anniv DATE
@@ -16,22 +17,23 @@ CREATE TABLE User (
 -- TABLE: Escape_Game
 -- ========================
 CREATE TABLE Escape_Game (
-    game_id INT AUTO_INCREMENT PRIMARY KEY,
+    game_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     titre VARCHAR(255),
     duree INT,
     difficulte ENUM('1','2','3','4','5'),
-    nb_joueurs ENUM('2','3','4','5','6','7','8'),
+    nb_joueurs VARCHAR(253),
     prix DECIMAL(10,2),
     localisation ENUM('domicile','Paris','Lille','Lyon'),
     theme VARCHAR(255),
-    disponible BOOLEAN
+    disponible BOOLEAN,
+    photo VARCHAR(255)
 );
 
 -- ========================
--- TABLE: Option
+-- TABLE: Options
 -- ========================
-CREATE TABLE Option (
-    option_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Options (
+    option_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     libelle VARCHAR(255),
     prix DECIMAL(10,2)
 );
@@ -40,13 +42,13 @@ CREATE TABLE Option (
 -- TABLE: Reservation
 -- ========================
 CREATE TABLE Reservation (
-    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     date_reservation DATETIME,
     creneau DATETIME,
     statut ENUM('en_attente','confirmee','annulee'),
     user_id INT,
     game_id INT,
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (user_id) REFERENCES Utilisateur(user_id),
     FOREIGN KEY (game_id) REFERENCES Escape_Game(game_id)
 );
 
@@ -54,7 +56,7 @@ CREATE TABLE Reservation (
 -- TABLE: Paiement
 -- ========================
 CREATE TABLE Paiement (
-    paiement_id INT AUTO_INCREMENT PRIMARY KEY,
+    paiement_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     montant DECIMAL(10,2),
     mode_paiement ENUM('stripe','paypal','applepay','googlepay'),
     promo INT,
@@ -67,13 +69,13 @@ CREATE TABLE Paiement (
 -- TABLE: Avis
 -- ========================
 CREATE TABLE Avis (
-    avis_id INT AUTO_INCREMENT PRIMARY KEY,
+    avis_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     notation ENUM('1','2','3','4','5'),
     commentaire TEXT,
     photo VARCHAR(255),
     user_id INT,
     game_id INT,
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (user_id) REFERENCES Utilisateur(user_id),
     FOREIGN KEY (game_id) REFERENCES Escape_Game(game_id)
 );
 
@@ -81,9 +83,9 @@ CREATE TABLE Avis (
 -- TABLE: LigneOption
 -- ========================
 CREATE TABLE LigneOption (
-    ligne_id INT AUTO_INCREMENT PRIMARY KEY,
+    ligne_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     game_id INT,
     option_id INT,
     FOREIGN KEY (game_id) REFERENCES Escape_Game(game_id),
-    FOREIGN KEY (option_id) REFERENCES Option(option_id)
+    FOREIGN KEY (option_id) REFERENCES Options(option_id)
 );
