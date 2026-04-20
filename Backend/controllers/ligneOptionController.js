@@ -1,11 +1,11 @@
-import { createLigneOptionModel, deleteLigneOptionModel, ligneOptionByIdModel, listLigneOptionsModel, updateLigneOptionModel, } from '../models/ligneOptionModel.js';
+import { addLigneOption, deleteLigneOptionModel, ligneOptionByIdModel, listLigneOptionsModel, updateLigneOptionModel, } from '../models/ligneOptionModel.js';
 
 //CREATE
 export async function createLigneOptionController(req, res) {
     try {
         const gameId = req.body.gameId;
-        const optionId = req.body.optionId;
-        const result = await createLigneOptionModel(gameId, optionId)
+                    const optionId = req.body.optionId;
+                    const result = await addLigneOption(gameId, optionId)
         res.status(201).json(result)
     } catch (error) {
         res.status(500).json({ error: 'Erreur lors de la création de la ligne option' });
@@ -53,3 +53,4 @@ export async function deleteLigneOptionController(req, res) {
     } catch (error) {
         res.status(500).json({ error: 'Erreur lors de la suppression de la ligne option' });
     }
+}
