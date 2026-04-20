@@ -4,7 +4,7 @@ import { connection } from "../config/db.js";
 // CREATE
 
 export async function addGame(titre, duree, difficulte, nb_joueurs, prix, localisation, theme, disponible, photo) {
-    const add = "INSERT INTO Escape_Game (titre, duree, difficulte, nb_joueurs,prix, localisation, theme, disponible, photo) VALUES (?,?,?,?,?,?,?,?);";
+    const add = "INSERT INTO Escape_Game (titre, duree, difficulte, nb_joueurs,prix, localisation, theme, disponible, photo) VALUES (?,?,?,?,?,?,?,?,?);";
 
     const [result] = await connection.query(add, [titre, duree, difficulte, nb_joueurs, prix, localisation, theme, disponible, photo]);
 

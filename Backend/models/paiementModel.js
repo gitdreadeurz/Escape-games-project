@@ -22,7 +22,9 @@ export async function getPayments() {
 
 // Paiement par id
 export async function getPaymentById(paiement_id) {
-    const select = "SELECT montant, mode_paiement, promo, statut, id_reservation FROM Paiement INNER JOIN Reservation ON Paiement.reservation_id = Reservation.reservation_id WHERE Paiement.paiement_id = ?;";
+    const select = "SELECT montant, mode_paiement, promo, Paiement.statut, Paiement.reservation_id FROM Paiement INNER JOIN Reservation ON Paiement.reservation_id = Reservation.reservation_id WHERE Paiement.paiement_id = ?;";
+
+
     const [result] = await connection.query(select, [paiement_id]);
     return result;
 
