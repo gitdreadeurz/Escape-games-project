@@ -25,8 +25,8 @@ export async function updateReservationModel(date_reservation, creneau, statut, 
     return result;
 }
 //DELETE
-export async function deleteReservationModel(reservation_id) {
-    const del = "DELETE FROM reservation WHERE reservation_id = ?";
-    const [result] = await connection.query(del, [reservation_id]);
+export async function deleteReservationModel(reservation_id, estSupprime) {
+    const del = "UPDATE Utilisateur SET estSupprime = ? WHERE game_id=?;";
+    const [result] = await connection.query(del, [reservation_id, estSupprime]);
     return result;
 }

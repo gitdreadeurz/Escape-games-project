@@ -52,7 +52,9 @@ export async function updateReservationController(req, res) {
 export async function deleteReservationController(req, res) {
     try {   
         const id = req.params.id;
-        const result = await deleteReservationModel(id);
+        const estSupprime = req.body.estSupprime;
+
+        const result = await deleteReservationModel(id, estSupprime);
         res.status(200).json(result)
     } catch (error) {
         res.status(500).json({ error: 'Erreur lors de la suppression de la réservation' });
