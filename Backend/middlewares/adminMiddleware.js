@@ -17,8 +17,8 @@ export function adminMiddleware(req, res, next) {
     
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
-        req.user = decode;
-        if (decoded.role !== 'admin') {
+        req.user = decoded;
+        if (decoded.role !== 'admin' || decoded.role !== 'superadmin') {
             return res.status(403).json({error: 'Accès refusé. Droits d\'administrateur requis.'})
         }
         next();
