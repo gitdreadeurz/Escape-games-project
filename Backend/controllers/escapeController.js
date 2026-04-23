@@ -64,8 +64,9 @@ export async function editGame(req, res) {
 export async function removeGame(req, res) {
     try {
         const id = req.params.game_id;
+        const estSupprime = req.body.estSupprime;
 
-        const result = await deleteGame(id);
+        const result = await deleteGame(id, estSupprime);
         if (!result) {
             return res.status(404).json({ error: "Game not found" });
         }
