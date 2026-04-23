@@ -1,5 +1,5 @@
 import { getUserByEmail } from "../models/userModel.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
@@ -9,14 +9,18 @@ const JWT_SECRET = process.env.DB_JWT_SECRET;
 export async function login(req, res) {
     try {
         const mail = req.body.mail;
-        const password_crypted = req.body.password_hash;
+        const password = req.body.password || req.body.password_hash;
 
-        const utilisateur = await getUserByEmail(mail);
-        if(utilisateur.length === 0){
-            return res.status(401).json({error: "email ou mot de passe incorrect"})
+        if (!mail || !password) {
+            return res.status(400).json({ error: "Email et mot de passe requis" });
         }
 
-        const isPasswordValid = bcrypt.compareSync(password_crypted, utilisateur[0].mot_de_passe);
+        const utilisateur = await getUserByEmail(mail);
+        if (utilisateur.length === 0) {
+            return res.status(401).json({ error: "email ou mot de passe incorrect" });
+        }
+
+        const isPasswordValid = bcrypt.compareSync(password, utilisateur[0].mot_de_passe);
 
         if(!isPasswordValid){
             return res.status(401).json({error: "email ou mot de passe incorrect"})
