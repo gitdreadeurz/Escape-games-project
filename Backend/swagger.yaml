@@ -1,0 +1,580 @@
+openapi: 3.0.0
+info:
+  title: Escape Game API
+  version: 1.0.0
+  description: API documentation for the Escape Games project backend.
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+tags:
+  - name: Auth
+    description: Authentication endpoints
+  - name: User
+    description: User management endpoints
+  - name: Option
+    description: Option management endpoints
+  - name: Avis
+    description: Avis (reviews) endpoints
+  - name: Game
+    description: Escape game endpoints
+  - name: Payment
+    description: Payment processing endpoints
+  - name: Reservation
+    description: Reservation endpoints
+  - name: LigneOption
+    description: LigneOption endpoints
+paths:
+  /auth/login:
+    post:
+      summary: User login
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Successful login
+        '401':
+          description: Unauthorized
+  /auth/register:
+    post:
+      summary: User registration
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+      responses:
+        '201':
+          description: User created
+        '400':
+          description: Bad request
+  /user:
+    get:
+      summary: List users
+      tags:
+        - User
+      responses:
+        '200':
+          description: A list of users
+    post:
+      summary: Create a new user
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created
+  /user/{id}:
+    get:
+      summary: Get user by ID
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User details
+    put:
+      summary: Update user by ID
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete user by ID
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted
+  /options:
+    get:
+      summary: List options
+      tags:
+        - Option
+      responses:
+        '200':
+          description: Options list
+    post:
+      summary: Create option
+      tags:
+        - Option
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Option created
+  /options/{id}:
+    get:
+      summary: Get option by ID
+      tags:
+        - Option
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Option details
+    put:
+      summary: Update option by ID
+      tags:
+        - Option
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete option by ID
+      tags:
+        - Option
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted
+  /avis:
+    get:
+      summary: List avis
+      tags:
+        - Avis
+      responses:
+        '200':
+          description: Avis list
+    post:
+      summary: Create avis
+      tags:
+        - Avis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Avis created
+  /avis/{id}:
+    get:
+      summary: Get avis by ID
+      tags:
+        - Avis
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Avis details
+    put:
+      summary: Update avis by ID
+      tags:
+        - Avis
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete avis by ID
+      tags:
+        - Avis
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted
+  /games:
+    get:
+      summary: List games
+      tags:
+        - Game
+      responses:
+        '200':
+          description: Games list
+    post:
+      summary: Create game
+      tags:
+        - Game
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Game created
+  /games/{game_id}:
+    get:
+      summary: Get game by ID
+      tags:
+        - Game
+      parameters:
+        - in: path
+          name: game_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Game details
+    put:
+      summary: Update game by ID
+      tags:
+        - Game
+      parameters:
+        - in: path
+          name: game_id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete game by ID
+      tags:
+        - Game
+      parameters:
+        - in: path
+          name: game_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted
+  /payments:
+    get:
+      summary: List payments
+      tags:
+        - Payment
+      responses:
+        '200':
+          description: Payments list
+    post:
+      summary: Create payment
+      tags:
+        - Payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Payment created
+  /payments/{paiement_id}:
+    get:
+      summary: Get payment by ID
+      tags:
+        - Payment
+      parameters:
+        - in: path
+          name: paiement_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Payment details
+    put:
+      summary: Update payment by ID
+      tags:
+        - Payment
+      parameters:
+        - in: path
+          name: paiement_id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete payment by ID
+      tags:
+        - Payment
+      parameters:
+        - in: path
+          name: paiement_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted
+  /reservation:
+    post:
+      summary: Create a reservation
+      tags:
+        - Reservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        '201':
+          description: Reservation created
+        '400':
+          description: Bad request
+    get:
+      summary: List reservations
+      tags:
+        - Reservation
+      responses:
+        '200':
+          description: List of reservations
+  /reservation/{id}:
+    get:
+      summary: Get reservation by ID
+      tags:
+        - Reservation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Reservation details
+    put:
+      summary: Update reservation by ID
+      tags:
+        - Reservation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete reservation by ID
+      tags:
+        - Reservation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted
+  /ligneOptions:
+    get:
+      summary: List ligne options
+      tags:
+        - LigneOption
+      responses:
+        '200':
+          description: List of ligne options
+    post:
+      summary: Create ligne option
+      tags:
+        - LigneOption
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Created
+  /ligneOptions/{id}:
+    get:
+      summary: Get ligne option by ID
+      tags:
+        - LigneOption
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Details
+    put:
+      summary: Update ligne option by ID
+      tags:
+        - LigneOption
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete ligne option by ID
+      tags:
+        - LigneOption
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Deleted
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+    EscapeGame:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        escapeId:
+          type: integer
+        date:
+          type: string
+          format: date-time

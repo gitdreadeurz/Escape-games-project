@@ -1,4 +1,6 @@
 import express from "express";
+import swaggerUi from "swagger-ui-express";
+import yaml from "yamljs";
 import optionRoute from './routes/optionRoute.js';
 import escapeRoute from './routes/escapeRoute.js';
 import paiementRoute from './routes/paiementRoute.js';
@@ -13,6 +15,10 @@ const port =3000;
 
 app.use(express.json());
 app.use('/auth', authRoute);
+
+// Swagger setup
+const swaggerDocument = yaml.load('./swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/user', userRoute);
 app.use('/options', optionRoute);
