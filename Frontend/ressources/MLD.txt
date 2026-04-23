@@ -18,7 +18,9 @@ Escape_Game = (
   prix DECIMAL(10,2),
   localisation ENUM('domicile','Paris','Lille','Lyon'),
   theme VARCHAR(255),
-  disponible BOOLEAN
+  disponible BOOLEAN,
+  photo varchar(255),
+  estsupprime BOOLEAN,
 );
 
 Option = (
