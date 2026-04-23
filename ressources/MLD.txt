@@ -6,7 +6,8 @@ User = (
   telephone CHAR(10),
   mot_de_passe VARCHAR(255),
   date_inscription DATETIME,
-  date_anniv DATE
+  date_anniv DATE,
+  estsupprime BOOLEAN
 );
 
 Escape_Game = (
@@ -20,13 +21,14 @@ Escape_Game = (
   theme VARCHAR(255),
   disponible BOOLEAN,
   photo varchar(255),
-  estsupprime BOOLEAN,
+  estsupprime BOOLEAN
 );
 
 Option = (
   option_id COUNTER,
   libelle VARCHAR(255),
-  prix DECIMAL(10,2)
+  prix DECIMAL(10,2),
+  estsupprime BOOLEAN
 );
 
 Reservation = (
@@ -35,7 +37,8 @@ Reservation = (
   creneau DATETIME,
   statut ENUM('en_attente','confirmee','annulee'),
   #user_id,
-  #game_id
+  #game_id,
+  estsupprime BOOLEAN
 );
 
 Paiement = (
@@ -44,7 +47,8 @@ Paiement = (
   mode_paiement ENUM('stripe','paypal','applepay','googlepay'),
   promo INT,
   statut ENUM('confirmee','annulee'),
-  #reservation_id
+  #reservation_id,
+  estsupprime BOOLEAN
 );
 
 Avis = (
