@@ -85,7 +85,9 @@ export async function editPayment(req, res) {
 export async function removePayment(req, res) {
     try {
         const paiement_id = req.params.paiement_id;
-        const payment = await deletePayment(paiement_id);
+        const estSupprime = req.body.estSupprime;
+        const payment = await deletePayment(paiement_id,estSupprime);
+
         res.json(payment);
 
 

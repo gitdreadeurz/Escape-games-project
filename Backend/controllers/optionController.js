@@ -45,7 +45,8 @@ export async function updateOptionController(req, res) {
 export async function deleteOptionController(req, res) {
     try {
         const id = req.params.id;
-        const result = await deleteOptionModel(id)
+        const estSupprime = req.body.estSupprime;
+        const result = await deleteOptionModel(id, estSupprime)
         res.status(200).json(result)
     } catch (error) {
         res.status(500).json({ error: 'Erreur lors de la suppression de l\'option' });
