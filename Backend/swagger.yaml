@@ -6,6 +6,8 @@ info:
 servers:
   - url: http://localhost:3000
     description: Local development server
+security:
+  - BearerAuth: []
 tags:
   - name: Auth
     description: Authentication endpoints
@@ -27,6 +29,7 @@ paths:
   /auth/login:
     post:
       summary: User login
+      security: []
       tags:
         - Auth
       requestBody:
@@ -51,6 +54,7 @@ paths:
   /auth/register:
     post:
       summary: User registration
+      security: []
       tags:
         - Auth
       requestBody:
@@ -578,3 +582,8 @@ components:
         date:
           type: string
           format: date-time
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
