@@ -40,10 +40,9 @@ export async function updatePayment(montant, mode_paiement, promo, statut, reser
 }
 
 // DELETE
-export async function deletePayment(paiement_id) {
-    const del = "DELETE FROM Paiement WHERE paiement_id=?;";
-    const [result] = await connection.query(del, [paiement_id]);
+export async function deletePayment(paiement_id, estSupprime) {
+    const del = "UPDATE Paiement SET estSupprime=? WHERE paiement_id=?;"
+    const [result] = await connection.query(del, [estSupprime, paiement_id]);
     return result;
-    
 }
 

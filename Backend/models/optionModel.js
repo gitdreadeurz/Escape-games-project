@@ -24,8 +24,8 @@ export async function updateOptionModel(libelle,prix,id){
     return result
 }
 //DELETE
-export async function deleteOptionModel(id){
-    const del = "DELETE FROM options WHERE option_id = ?"
-    const [result] = await connection.query(del, [id])
+export async function deleteOptionModel(id, estSupprime){
+    const del = "UPDATE options SET estSupprime=? WHERE option_id = ?"
+    const [result] = await connection.query(del, [estSupprime,id])
     return result
 }

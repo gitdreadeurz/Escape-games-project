@@ -44,7 +44,7 @@ export async function updateGame(game_id, titre, duree, difficulte, nb_joueurs, 
 
 // DELETE
 
-export async function deleteGame(game_id) {
+export async function deleteGame(game_id, estSupprime) {
     const del = "UPDATE Escape_Game SET estSupprime = ? WHERE game_id=?;";
 
     const [result] = await connection.query(del, [estSupprimee, game_id]);
