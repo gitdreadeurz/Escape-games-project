@@ -5,7 +5,7 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-export function authMiddleware(req, res, next) {
+export default function authMiddleware(req, res, next) {
 
     const header = req.headers.authorization;
     if (!header) {

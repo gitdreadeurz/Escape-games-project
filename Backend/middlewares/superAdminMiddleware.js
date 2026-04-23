@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export function superAdminMiddleware(req, res, next) {
+export default function superAdminMiddleware(req, res, next) {
 
     const header = req.headers.authorization;
     if(!header) {

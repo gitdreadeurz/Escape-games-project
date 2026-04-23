@@ -1,7 +1,7 @@
 import { createGame,listGames, getGame, editGame, removeGame} from "../controllers/escapeController.js";
 import express from "express";
 import authMiddleware from '../middlewares/authMiddleware.js';
-import adminMiddleWare from '../middlewares/adminMiddleware.js'
+import adminMiddleware from '../middlewares/adminMiddleware.js'
 import superAdminMiddleware from "../middlewares/superAdminMiddleware.js";
 
 const router = express.Router();
@@ -13,12 +13,12 @@ router.get("/", listGames);
 router.get("/:game_id", getGame);
 
 // Ajouter un nouvel escape game
-router.post("/", authMiddleware, adminMiddleWare, createGame);
+router.post("/", authMiddleware, adminMiddleware, createGame);
 
 // Update un escape game
-router.put ("/:game_id", authMiddleware, adminMiddleWare, editGame);
+router.put ("/:game_id", authMiddleware, adminMiddleware, editGame);
 
 // Supprimer un escape game
-router.delete("/:game_id", authMiddleware, adminMiddleWare, removeGame);
+router.delete("/:game_id", authMiddleware, adminMiddleware, removeGame);
 
 export default router;

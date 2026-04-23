@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export function adminMiddleware(req, res, next) {
+export default function adminMiddleware(req, res, next) {
 
     const header = req.headers.authorization;
     if(!header) {
