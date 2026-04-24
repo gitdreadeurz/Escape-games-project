@@ -32,5 +32,5 @@ export async function updateAvis(avis_id, notation, commentaire, photo, user_id,
 export async function deleteAvis(avis_id) {
     const del = `DELETE FROM Avis WHERE avis_id = ?;`;
     const [result] = await connection.query (del, [avis_id]);
-    return result; 
+    return result;
 }
