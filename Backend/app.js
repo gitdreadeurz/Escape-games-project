@@ -27,7 +27,7 @@ app.use('/user', userRoute);
 app.use('/option', optionRoute);
 app.use('/avis', avisRoute);
 app.use('/game', escapeRoute);
-app.use('/paiement',paiementRoute);
+app.use('/paiement',paiementRoute);1
 app.use('/reservation', reservationRoute);
 app.use('/ligneoption', ligneOptionRoute);
 

@@ -1,4 +1,4 @@
-User = (
+utilisateur = (
   user_id COUNTER,
   nom VARCHAR(255),
   prenom VARCHAR(255),
@@ -24,7 +24,7 @@ Escape_Game = (
   estsupprime BOOLEAN
 );
 
-Option = (
+Options = (
   option_id COUNTER,
   libelle VARCHAR(255),
   prix DECIMAL(10,2),
@@ -36,9 +36,9 @@ Reservation = (
   date_reservation DATETIME,
   creneau DATETIME,
   statut ENUM('en_attente','confirmee','annulee'),
+  estsupprime BOOLEAN,
   #user_id,
-  #game_id,
-  estsupprime BOOLEAN
+  #game_id  
 );
 
 Paiement = (
@@ -47,8 +47,8 @@ Paiement = (
   mode_paiement ENUM('stripe','paypal','applepay','googlepay'),
   promo INT,
   statut ENUM('confirmee','annulee'),
-  #reservation_id,
-  estsupprime BOOLEAN
+  estsupprime BOOLEAN,
+  #reservation_id  
 );
 
 Avis = (
@@ -56,12 +56,14 @@ Avis = (
   notation ENUM(1,2,3,4,5),
   commentaire TEXT,
   photo VARCHAR(255),
+  estsupprime BOOLEAN,
   #user_id,
-  #game_id
+  #game_id  
 );
 
 LigneOption = (
   ligne_id COUNTER,
+  estsupprime BOOLEAN,
   #game_id,
-  #option_id
+  #option_id  
 );
