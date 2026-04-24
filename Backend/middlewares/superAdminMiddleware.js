@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const JWT_SECRET = process.env.DB_JWT_SECRET;
+
 export default function superAdminMiddleware(req, res, next) {
 
     const header = req.headers.authorization;
@@ -23,6 +25,6 @@ export default function superAdminMiddleware(req, res, next) {
         }
         next();
     } catch (error) {
-        return res.status(401).json({error: 'Token invalide ou expiré ou pas le droit'});
+        return res.status(401).json({error: 'Token invalide ou expiré'});
     }
 }
