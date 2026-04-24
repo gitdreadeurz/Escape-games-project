@@ -16,7 +16,7 @@ export async function addGame(titre, duree, difficulte, nb_joueurs, prix, locali
 
 // Tous les escape games
 export async function getAllGames() {
-    const select = "SELECT game_id,titre, duree, difficulte, nb_joueurs,prix, localisation, theme, disponible, photo FROM Escape_Game;";
+    const select = "SELECT * FROM Escape_Game;";
 
     const [result] = await connection.query(select);
 
@@ -25,7 +25,7 @@ export async function getAllGames() {
 
 // Escape game par id
 export async function getGameById(game_id) {
-    const select = "SELECT game_id,titre, duree, difficulte, nb_joueurs,prix, localisation, theme, disponible, photo FROM Escape_Game WHERE game_id = ?;";
+    const select = "SELECT * FROM Escape_Game WHERE game_id = ?;";
 
     const [result] = await connection.query(select, [game_id]);
 

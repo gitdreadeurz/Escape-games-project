@@ -24,12 +24,12 @@ const swaggerDocument = yaml.load('./swagger.yaml');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/user', userRoute);
-app.use('/options', optionRoute);
+app.use('/option', optionRoute);
 app.use('/avis', avisRoute);
-app.use('/games', escapeRoute);
-app.use('/payments',paiementRoute);
+app.use('/game', escapeRoute);
+app.use('/paiement',paiementRoute);
 app.use('/reservation', reservationRoute);
-app.use('/ligneOptions', ligneOptionRoute);
+app.use('/ligneoption', ligneOptionRoute);
 
 app.listen(port,()=>{
     console.log(`Serveur express demarre sur http://localhost:${port}`);

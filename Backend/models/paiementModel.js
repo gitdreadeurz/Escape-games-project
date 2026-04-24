@@ -15,15 +15,14 @@ export async function newPayment(montant, mode_paiement, promo, statut, reservat
 
 // Tous les paiements
 export async function getPayments() {
-    const select = "SELECT paiement_id,montant, mode_paiement, promo, p.statut, p.reservation_id FROM paiement p INNER JOIN Reservation r ON p.reservation_id = r.reservation_id;";
+    const select = "SELECT paiement_id,montant, mode_paiement, promo, p.statut, p.reservation_id, p.estSupprime FROM paiement p INNER JOIN Reservation r ON p.reservation_id = r.reservation_id;";
     const [result] = await connection.query(select);
     return result;
 }
 
 // Paiement par id
 export async function getPaymentById(paiement_id) {
-    const select = "SELECT paiement_id,montant, mode_paiement, promo, Paiement.statut, Paiement.reservation_id FROM Paiement INNER JOIN Reservation ON Paiement.reservation_id = Reservation.reservation_id WHERE Paiement.paiement_id = ?;";
-
+    const select = "SELECT paiement_id,montant, mode_paiement, promo, Paiement.statut, Paiement.reservation_id, Paiement.estSupprime FROM Paiement INNER JOIN Reservation ON Paiement.reservation_id = Reservation.reservation_id WHERE Paiement.paiement_id = ?;";
 
     const [result] = await connection.query(select, [paiement_id]);
     return result;
