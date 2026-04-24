@@ -7,9 +7,9 @@ import superAdminMiddleware from "../middlewares/superAdminMiddleware.js";
 const router = express.Router();
 
 router.post('/', authMiddleware, createReservationController);
-router.get('/', authMiddleware, adminMiddleware, listReservationController);
-router.get('/:id', authMiddleware, adminMiddleware, reservationByIdController);
-router.put('/:id', authMiddleware, adminMiddleware, updateReservationController);
-router.delete('/:id', authMiddleware, superAdminMiddleware, deleteReservationController);
+router.get('/', adminMiddleware, authMiddleware, listReservationController);
+router.get('/:id', adminMiddleware, authMiddleware, reservationByIdController);
+router.put('/:id', adminMiddleware, authMiddleware, updateReservationController);
+router.delete('/:id', adminMiddleware, authMiddleware, deleteReservationController);
 
 export default router;
