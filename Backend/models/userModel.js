@@ -30,8 +30,14 @@ export async function updateUser(user_id, nom, prenom, role, telephone, mail, mo
     return result;
 }
 
-export async function deleteUser(user_id, estSupprime) {
+export async function softDeleteUser(user_id, estSupprime) {
     const deleteQuery = "UPDATE Utilisateur SET estSupprime = ? WHERE user_id=?;";
     const [result] = await connection.query(deleteQuery, [estSupprime, user_id]);
+    return result;
+}
+
+export async function hardDeleteUser(user_id) {
+    const deleteQuery = "DELETE FROM Utilisateur WHERE user_id=?;";
+    const [result] = await connection.query(deleteQuery, [user_id]);
     return result;
 }
