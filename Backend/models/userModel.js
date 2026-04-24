@@ -31,7 +31,7 @@ export async function updateUser(user_id, nom, prenom, role, telephone, mail, mo
 }
 
 export async function deleteUser(user_id, estSupprime) {
-    const deleteQuery = "UPDATE Utilisateur SET estSupprime = ? WHERE game_id=?;";
-    const [result] = await connection.query(deleteQuery, [user_id,estSupprime]);
+    const deleteQuery = "UPDATE Utilisateur SET estSupprime = ? WHERE user_id=?;";
+    const [result] = await connection.query(deleteQuery, [estSupprime, user_id]);
     return result;
 }

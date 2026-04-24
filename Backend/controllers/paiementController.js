@@ -90,7 +90,6 @@ export async function removePayment(req, res) {
 
         res.json(payment);
 
-
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "erreur serveur" })

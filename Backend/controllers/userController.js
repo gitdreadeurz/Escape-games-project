@@ -71,7 +71,6 @@ export async function delUser(req, res) {
     try {
         const { id } = req.params;
         const estSupprime = req.body.estSupprime;
-        
         const user = await deleteUser(id, estSupprime);
         res.status(200).json(user);
     } catch (error) {
