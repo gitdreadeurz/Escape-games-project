@@ -27,8 +27,8 @@ export async function updateLigneOptionModel(game_id, option_id, id) {
 }
 
 //DELETE
-export async function deleteLigneOptionModel(id) {
-    const deleteQuery = "DELETE FROM LigneOption WHERE ligne_id = ?;";
-    const [result] = await connection.query(deleteQuery, [id]);
+export async function deleteLigneOptionModel(estSupprime, id) {
+    const deleteQuery = "UPDATE LigneOption SET estSupprime = ? WHERE ligne_id = ?;";
+    const [result] = await connection.query(deleteQuery, [estSupprime, id]);
     return result;
 }

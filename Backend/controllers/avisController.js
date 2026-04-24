@@ -47,7 +47,8 @@
  export async function delAvis(req, res) {
     try {
         const { id } = req.params;
-        const avis = await deleteAvis(id);
+        const estSupprime = req.body.estSupprime;
+        const avis = await deleteAvis(estSupprime, id);
         res.status(200).json(avis);
     } catch (error) {
         console.error(error);
