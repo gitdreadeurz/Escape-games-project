@@ -9,10 +9,10 @@ const JWT_SECRET = process.env.DB_JWT_SECRET;
 
 export async function newUser(req, res) {
 
-    
+
     try {
-        const {nom, prenom, telephone, mail, mot_de_passe, date_anniv} = req.body;
-        
+        const { nom, prenom, telephone, mail, mot_de_passe, date_anniv } = req.body;
+
         const exists = await getUserByEmail(mail);
         if (exists.length > 0) {
             return res.status(409).json({ error: "email deja utilisé" })
@@ -20,11 +20,11 @@ export async function newUser(req, res) {
             return res.status(400).json({ error: "email invalide" })
         } if (mot_de_passe.length < 6) {
             return res.status(422).json({ error: "Le mot de passe doit faire au minimum 6 caractères" })
-            
-        }  
-        
+
+        }
+
         const password_hash = bcrypt.hashSync(mot_de_passe, 10);
-        
+
         const user = await addUser(nom, prenom, telephone, mail, password_hash, date_anniv);
 
         res.status(201).json(user);
@@ -71,7 +71,7 @@ export async function delUser(req, res) {
     try {
         const { id } = req.params;
         const estSupprime = req.body.estSupprime;
-        
+
         const user = await deleteUser(id, estSupprime);
         res.status(200).json(user);
     } catch (error) {
