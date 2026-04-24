@@ -6,10 +6,10 @@ import superAdminMiddleware from "../middlewares/superAdminMiddleware.js";
 
 const router = express.Router();
 
-router.post('/', authMiddleware, adminMiddleware, createLigneOptionController);
-router.get('/', authMiddleware, adminMiddleware, listLigneOptionsController);
-router.get('/:id', authMiddleware, adminMiddleware, ligneOptionByIdController);
-router.put('/:id', authMiddleware, adminMiddleware, updateLigneOptionController);
-router.delete('/:id', authMiddleware, adminMiddleware, deleteLigneOptionController);
+router.post('/', adminMiddleware, authMiddleware, createLigneOptionController);
+router.get('/', adminMiddleware, authMiddleware, listLigneOptionsController);
+router.get('/:id', adminMiddleware, authMiddleware, ligneOptionByIdController);
+router.put('/:id', adminMiddleware, authMiddleware, updateLigneOptionController);
+router.delete('/:id', adminMiddleware, authMiddleware, deleteLigneOptionController);
 
 export default router;
