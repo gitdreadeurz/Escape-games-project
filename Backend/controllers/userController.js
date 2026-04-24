@@ -1,4 +1,4 @@
-import { addUser, getAllUsers, getUserById, updateUser, deleteUser, getUserByEmail } from "../models/userModel.js";
+import { addUser, getAllUsers, getUserById, updateUser, softDeleteUser, hardDeleteUser, getUserByEmail } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -67,11 +67,11 @@ export async function updUser(req, res) {
     }
 }
 
-export async function delUser(req, res) {
+export async function softDelUser(req, res) {
     try {
         const { id } = req.params;
         const estSupprime = req.body.estSupprime;
-        const user = await deleteUser(id, estSupprime);
+        const user = await softDeleteUser(id, estSupprime);
         res.status(200).json(user);
     } catch (error) {
         console.error(error);
@@ -79,3 +79,13 @@ export async function delUser(req, res) {
     }
 }
 
+export async function hardDelUser(req, res) {
+    try {
+        const { id } = req.params;
+        const user = await hardDeleteUser(id);
+        res.status(200).json(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erreur lors de la suppression de l'utilisateur"});
+    }
+}
