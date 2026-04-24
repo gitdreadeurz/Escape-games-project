@@ -22,21 +22,29 @@ export async function login(req, res) {
 
         const isPasswordValid = bcrypt.compareSync(password, utilisateur[0].mot_de_passe);
 
-        if(!isPasswordValid){
-            return res.status(401).json({error: "email ou mot de passe incorrect"})
+        if (!isPasswordValid) {
+            return res.status(401).json({ error: "email ou mot de passe incorrect" })
         }
 
         const token = jwt.sign(
-      { mail: utilisateur[0].mail, role: utilisateur[0].role },
-      JWT_SECRET,
-      { expiresIn: '1h' }
-      
-    );
-    console.log(token);
+            { mail: utilisateur[0].mail, role: utilisateur[0].role },
+            JWT_SECRET,
+            { expiresIn: '1h' }
 
-        res.json({token})
+        );
+        console.log(token);
+
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 3600000
+        });
+
+
+        res.status(200).json({ message: "Connexion réussie" });
     } catch (error) {
         console.error(error);
-        res.status(500).json({error: "erreur serveur"})
+        res.status(500).json({ error: "erreur serveur" })
     }
 }

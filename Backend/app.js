@@ -1,6 +1,7 @@
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import yaml from "yamljs";
+import cookieParser from "cookie-parser";
 import optionRoute from './routes/optionRoute.js';
 import escapeRoute from './routes/escapeRoute.js';
 import paiementRoute from './routes/paiementRoute.js';
@@ -15,6 +16,8 @@ const port =3000;
 
 app.use(express.json());
 app.use('/auth', authRoute);
+app.use(cookieParser());
+
 
 // Swagger setup
 const swaggerDocument = yaml.load('./swagger.yaml');
