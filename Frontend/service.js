@@ -30,7 +30,12 @@ export function hardDelUser(id) {
 // Identification des users
 
 export function registerUser(data) {
-    return client.post('/auth/register', data)
+    console.log(data);
+    try {
+        return client.post('/auth/register', data)
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export function loginUser(data) {
