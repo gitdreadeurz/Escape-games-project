@@ -42,7 +42,7 @@ export async function login(req, res) {
         });
 
 
-        res.status(200).json({ message: "Connexion réussie" });
+        res.status(200).json({ message: "Connexion réussie", token: token });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "erreur serveur" })
