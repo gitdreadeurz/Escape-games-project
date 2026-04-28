@@ -13,7 +13,7 @@ function Navbar() {
         <Link to="/concept">Le concept</Link>
         <Link to="/missions">Les missions</Link>
         <Link to="/avis">Les avis</Link>
-        <Link to="/inscription">Inscription/Contact</Link>
+        <Link to="/inscription">Connexion / Inscription</Link>
         <Link to="/reservation" className="nav-reserve">Réservez</Link>
       </nav>
     </header>
