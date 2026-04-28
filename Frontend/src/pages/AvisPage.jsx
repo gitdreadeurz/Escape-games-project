@@ -44,15 +44,16 @@ const fetchAvis = async () => {
                     {avis.map(avis => (
                         <div key={avis.id} style={{ 
                             background: 'white',
-                            color: '#333', 
+                            color: 'black', 
                             padding: '1.5rem', 
                             marginBottom: '1rem',
                             borderRadius: '8px',
                             boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
                         }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <strong>{avis.name}</strong>
-                                <span>{"⭐".repeat(avis.note)}</span>
+                                <strong>{avis.User}</strong>
+                                <p>{avis.Game}</p>
+                                <span>{"⭐".repeat(avis.notation)}</span>
                             </div>
                             <p style={{ marginTop: '0.5rem' }}>{avis.commentaire}</p>
                         </div>
