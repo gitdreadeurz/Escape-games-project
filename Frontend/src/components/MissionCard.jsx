@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import Button from './Button';
 
+
 function MissionCard({ mission }) {
     return (
         <div className="mission-card">
             <div className="mission-card-image">
-                {/* Image placeholder - à remplacer par les vraies images */}
-                <div className="mission-image-placeholder">{mission.title[0]}</div>
+                <img src={mission.image} alt={mission.title} />
             </div>
             <div className="mission-card-content">
                 <h3>{mission.title}</h3>
