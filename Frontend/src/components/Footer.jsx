@@ -1,6 +1,6 @@
-import logo from "../assets/logo.png";
-import facebook from "../assets/facebook.png";
-import instagram from "../assets/instagram.png";
+import logo from "../assets/logo.webp";
+import facebook from "../assets/facebook.webp";
+import instagram from "../assets/instagram.webp";
 
 function Footer() {
   return (
