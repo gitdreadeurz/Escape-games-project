@@ -6,7 +6,11 @@ function MissionCard({ mission }) {
         <div className="mission-card">
             <div className="mission-card-image">
                 {/* Image placeholder - à remplacer par les vraies images */}
-                <div className="mission-image-placeholder">{mission.title[0]}</div>
+                <div className="mission-image-placeholder">
+                    <img src={mission.image} alt={mission.title} className="src" 
+                    style={{width : "250px", height: "250px", contain: "strict"}}
+                    />
+                </div>
             </div>
             <div className="mission-card-content">
                 <h3>{mission.title}</h3>
@@ -15,7 +19,7 @@ function MissionCard({ mission }) {
                 <p>{mission.description}</p>
                 <p style={{ marginTop: '1rem' }}>
                     <strong>Durée:</strong> {mission.duration} min | 
-                    <strong> Joueurs:</strong> {mission.minPlayers}-{mission.maxPlayers}
+                    <strong>Joueurs:</strong> {mission.minPlayers}-{mission.maxPlayers}
                 </p>
                 <div style={{ marginTop: '1rem' }}>
                     <Link to="/reservation">

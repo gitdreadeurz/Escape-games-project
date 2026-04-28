@@ -7,7 +7,7 @@ export const missions = [
         duration: 60,
         minPlayers: 2,
         maxPlayers: 6,
-        image: "/assets/images/pirates.jpg",
+        image: "../src/assets/pirate.webp",
         type: "sur site"
     },
     {
@@ -18,7 +18,7 @@ export const missions = [
         duration: 75,
         minPlayers: 3,
         maxPlayers: 6,
-        image: "/assets/images/zombie.jpg",
+        image: "../src/assets/zombie.webp",
         type: "sur site"
     },
     {
