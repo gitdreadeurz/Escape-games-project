@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import { missions } from '../data/missions';
 import MissionCard from '../components/MissionCard';
 import { Link } from 'react-router-dom';
-import heroImage from "../assets/hero.png";
+import heroImage from "../assets/hero.webp";
 
 function HomePage() {
     const missionsSurSite = missions.filter(m => m.type === "sur site").slice(0, 3);
