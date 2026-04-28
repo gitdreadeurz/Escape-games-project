@@ -1,25 +1,23 @@
 import { Link } from 'react-router-dom';
 import Button from './Button';
 
-function MissionCard({ mission }) {
+function MissionCard({ game }) {
     return (
         <div className="mission-card">
             <div className="mission-card-image">
-                {/* Image placeholder - à remplacer par les vraies images */}
                 <div className="mission-image-placeholder">
-                    <img src={mission.image} alt={mission.title} className="src" 
-                    style={{width : "250px", height: "250px", contain: "strict"}}
-                    />
+                    <img src={game.photo} alt={game.titre} className="src" 
+                    style={{width : "90%", height: "70%", objectFit: "contain"}}/>
                 </div>
             </div>
             <div className="mission-card-content">
-                <h3>{mission.title}</h3>
-                <span className="difficulty">{mission.difficulty}</span>
-                <span className="mission-type">{mission.type}</span>
-                <p>{mission.description}</p>
+                <h3>{game.titre}</h3>
+                <span>Difficulte : {"⭐".repeat(game.difficulte)}</span>
+                <span className="mission-type">{game.type}</span>
+                <p>{game.description}</p>
                 <p style={{ marginTop: '1rem' }}>
-                    <strong>Durée:</strong> {mission.duration} min | 
-                    <strong>Joueurs:</strong> {mission.minPlayers}-{mission.maxPlayers}
+                    <strong>Durée:</strong> {game.duree} min | 
+                    <strong> Joueurs:</strong> {game.nb_joueurs}
                 </p>
                 <div style={{ marginTop: '1rem' }}>
                     <Link to="/reservation">
