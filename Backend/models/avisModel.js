@@ -7,7 +7,7 @@ export async function addAvis(notation, commentaire, photo, user_id, game_id) {
 }
 
 export async function getAllAvis() {
-    const select = `SELECT avis_id, notation, commentaire, a.photo, a.user_id, a.game_id FROM Avis a
+    const select = `SELECT avis_id, notation, commentaire, a.photo, a.user_id, CONCAT (u.prenom,' ', u.nom) AS User, a.game_id, g.titre AS Game FROM Avis a
                     INNER JOIN Utilisateur u ON a.user_id = u.user_id
                     INNER JOIN Escape_Game g ON a.game_id = g.game_id;`;
     const [result] = await connection.query(select);
@@ -15,7 +15,7 @@ export async function getAllAvis() {
 }
 
 export async function getAvisById(avis_id) {
-    const select = `SELECT avis_id, notation, commentaire, a.photo, a.user_id, a.game_id FROM Avis a
+    const select = `SELECT avis_id, notation, commentaire, a.photo, a.user_id, CONCAT (u.prenom,' ', u.nom) AS User, a.game_id, g.titre AS Game FROM Avis a
                     INNER JOIN Utilisateur u ON a.user_id = u.user_id
                     INNER JOIN Escape_Game g ON a.game_id = g.game_id
                     WHERE a.avis_id = ?;`;

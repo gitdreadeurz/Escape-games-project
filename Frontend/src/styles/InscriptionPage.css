@@ -1,0 +1,185 @@
+/* Container principal */
+.page-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  background: #1f2033;
+  padding: 60px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+}
+
+/* Sections connexion et inscription */
+.page-content > div {
+  background: #2b2b3b;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+}
+
+/* Titres h1 */
+.page-content h1 {
+  color: #f4a321;
+  font-size: 28px;
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+
+
+
+/* Paragraphes */
+.page-content p {
+  color: #ccc;
+  font-size: 14px;
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+/* Labels simples (section connexion) */
+.page-content label {
+  display: block;
+  color: #f4a321;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+.page-content label:first-of-type {
+  margin-top: 0;
+}
+
+/* Inputs simples (section connexion) */
+.page-content input[type="text"],
+.page-content input[type="password"],
+.page-content input[type="email"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #4b94e8;
+  border-radius: 8px;
+  background: #1f2033;
+  color: white;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.page-content input[type="text"]:focus,
+.page-content input[type="password"]:focus,
+.page-content input[type="email"]:focus {
+  outline: none;
+  border-color: #f4a321;
+  box-shadow: 0 0 12px rgba(244, 163, 33, 0.4);
+  background: #252536;
+}
+
+/* Form groups (section inscription) */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #f4a321;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 13px;
+  margin-top: 0;
+}
+
+.form-group input {
+  padding: 12px 14px;
+  border: 2px solid #4b94e8;
+  border-radius: 8px;
+  background: #1f2033;
+  color: white;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #f4a321;
+  box-shadow: 0 0 12px rgba(244, 163, 33, 0.4);
+  background: #252536;
+}
+
+/* Boutons */
+button {
+  background: #4b94e8;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+}
+
+button:hover {
+  background: #f4a321;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 163, 33, 0.3);
+}
+
+button[variant="primary"] {
+  background: #f4a321;
+}
+
+button[variant="primary"]:hover {
+  background: #e89315;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .page-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 40px 20px;
+  }
+
+  .page-content h1 {
+    font-size: 24px;
+  }
+
+  .page-content > div {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-content {
+    padding: 30px 15px;
+    gap: 30px;
+  }
+
+  .page-content > div {
+    padding: 20px;
+  }
+
+  .page-content h1 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .page-content p {
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
