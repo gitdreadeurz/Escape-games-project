@@ -125,8 +125,8 @@ export function deletePayment(id){
 
 // Fonctions pour les avis
 
-export function getAllAvis(){
-    return client.get('/avis')
+export function getAllAvis(page = 1){
+    return client.get('/avis', { params: { page } })
 }
 
 export function getAvisById(id){
