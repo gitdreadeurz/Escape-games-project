@@ -4,11 +4,15 @@ import Button from '../components/Button';
 import '../styles/InscriptionPage.css';
 import { registerUser } from '../../service';
 import { loginUser } from '../../service';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 function login() {
+
+useEffect(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}, []);
 
     // Constantes pour l'inscription
     const [formData, setFormData] = useState({
