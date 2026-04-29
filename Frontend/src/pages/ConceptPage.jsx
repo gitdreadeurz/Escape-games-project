@@ -1,19 +1,25 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import conceptImage from '../assets/concept.webp';
+import heroImage from '../assets/heroConcept.webp';
 
 function ConceptPage() {
-    return (
-        <div className="page">
-            <Navbar />
-            <div className="page-content">
-                <h1>Le concept</h1>
-                
-                <div className="concept-image">
-                    <div className="concept-image-placeholder">🎮</div>
-                </div>
-                
-                <p className="concept-description">
-                    Créé en 2022 à Lille par cinq passionnés d'énigmes, cet escape game propose 
+  return (
+    <div className="page">
+      <Navbar />
+
+      <main className="concept-page">
+        <img src={heroImage} alt="Hero Concept" className="concept-hero" />
+
+        <section className="concept-section">
+          <h1>Le concept</h1>
+
+          <div className="concept-image">
+            <img src={conceptImage} alt="Concept Escape Game" />
+          </div>
+
+          <p className="concept-description">
+           Créé en 2022 à Lille par cinq passionnés d'énigmes, cet escape game propose 
                     une expérience immersive basée sur plusieurs salles aux univers variés, chacune 
                     remplie de défis à relever en équipe. Les joueurs peuvent vivre l'aventure sur 
                     place dans des décors conçus pour l'immersion, ou directement chez eux grâce 
@@ -23,12 +29,13 @@ function ConceptPage() {
                     costumes pour renforcer l'ambiance. Le concept repose sur la coopération, la 
                     réflexion et l'exploration, avec des scénarios évolutifs selon les choix des 
                     participants. Pensé pour s'adapter à tous les événements, il transforme chaque 
-                    session en une aventure unique et mémorable.
-                </p>
-            </div>
-            <Footer />
-        </div>
-    );
+                    session en une aventure unique et mémorable.          </p>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
 
 export default ConceptPage;
