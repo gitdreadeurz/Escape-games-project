@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import Button from './Button';
 
-function MissionCard({ game }) {
+function MissionCard({ game, onDelete, userRole }) {
+    const canDelete = userRole === 'admin' || userRole === 'superAdmin';
+
     return (
         <div className="mission-card">
             <div className="mission-card-image">
@@ -24,6 +26,11 @@ function MissionCard({ game }) {
                 <div style={{ marginTop: '1rem' }}>
                     <Link to="/reservation">
                         <Button text="Réserver" variant="secondary" />
+                        {canDelete && (
+                            <Button text="Supprimer" 
+                                    variant="danger" 
+                                    onClick={() => onDelete(game.id)} />
+                        )}
                     </Link>
                 </div>
             </div>

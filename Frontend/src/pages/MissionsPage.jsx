@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import MissionCard from '../components/MissionCard';
 import { missions } from '../data/missions';
-import { getAllGames } from '../../service';
+import { getAllGames, deleteGame } from '../../service';
 import { useEffect, useState } from 'react';
 
 function MissionsPage() {
