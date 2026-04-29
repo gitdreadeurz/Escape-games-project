@@ -37,14 +37,14 @@ function HomePage() {
         <h2>Les Missions sur site</h2>
         <div className="missions-grid">
           {missionsSurSite.map(mission => (
-            <MissionCard key={mission.id} mission={mission} />
+            <MissionCard key={mission.id} game={mission} />
           ))}
         </div>
 
         <h2>Les Missions à domicile</h2>
         <div className="missions-grid">
           {missionsADomicile.map(mission => (
-            <MissionCard key={mission.id} mission={mission} />
+            <MissionCard key={mission.id} game={mission} />
           ))}
         </div>
       </section>

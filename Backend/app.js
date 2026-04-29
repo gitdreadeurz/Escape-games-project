@@ -16,9 +16,10 @@ const app = express();
 const port =3000;
 
 app.use(express.json());
+app.use(cors());
 app.use('/auth', authRoute);
 app.use(cookieParser());
-app.use(cors());
+
 
 // Swagger setup
 const swaggerDocument = yaml.load('./swagger.yaml');

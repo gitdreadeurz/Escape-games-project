@@ -1,3 +1,15 @@
+
+import mission1 from "../assets/mission1.webp";
+import mission2 from "../assets/mission2.webp";
+import mission3 from "../assets/mission3.webp";
+import mission4 from "../assets/mission4.webp";
+import mission5 from "../assets/mission5.webp";
+import mission6 from "../assets/mission6.webp";
+import mission7 from "../assets/mission7.webp";
+import mission8 from "../assets/mission8.webp";
+import mission9 from "../assets/mission9.webp";
+import mission10 from "../assets/mission10.webp";
+
 export const missions = [
     {
         id: 1,
@@ -7,7 +19,7 @@ export const missions = [
         duration: 60,
         minPlayers: 2,
         maxPlayers: 6,
-        image: "../src/assets/pirate.webp",
+        image: mission1,
         type: "sur site"
     },
     {
@@ -18,7 +30,7 @@ export const missions = [
         duration: 75,
         minPlayers: 3,
         maxPlayers: 6,
-        image: "../src/assets/zombie.webp",
+        image: mission2,
         type: "sur site"
     },
     {
@@ -29,7 +41,7 @@ export const missions = [
         duration: 90,
         minPlayers: 4,
         maxPlayers: 8,
-        image: "/assets/images/avengers.jpg",
+        image: mission3,
         type: "sur site"
     },
     {
@@ -40,7 +52,7 @@ export const missions = [
         duration: 60,
         minPlayers: 2,
         maxPlayers: 6,
-        image: "/assets/images/jurassic.jpg",
+        image: mission4,
         type: "sur site"
     },
     {
@@ -51,7 +63,7 @@ export const missions = [
         duration: 75,
         minPlayers: 3,
         maxPlayers: 6,
-        image: "/assets/images/azkaban.jpg",
+        image: mission5,
         type: "sur site"
     },
     {
@@ -62,7 +74,7 @@ export const missions = [
         duration: 90,
         minPlayers: 2,
         maxPlayers: 5,
-        image: "/assets/images/prison.jpg",
+        image: mission6,
         type: "sur site"
     },
     {
@@ -73,7 +85,7 @@ export const missions = [
         duration: 60,
         minPlayers: 2,
         maxPlayers: 6,
-        image: "/assets/images/poudlard.jpg",
+        image: mission7,
         type: "à domicile"
     },
     {
@@ -84,7 +96,7 @@ export const missions = [
         duration: 75,
         minPlayers: 2,
         maxPlayers: 4,
-        image: "/assets/images/braquage.jpg",
+        image: mission8,
         type: "à domicile"
     },
     {
@@ -95,7 +107,7 @@ export const missions = [
         duration: 90,
         minPlayers: 3,
         maxPlayers: 6,
-        image: "/assets/images/louvre.jpg",
+        image: mission9,
         type: "à domicile"
     },
     {
@@ -106,7 +118,7 @@ export const missions = [
         duration: 60,
         minPlayers: 2,
         maxPlayers: 5,
-        image: "/assets/images/faucon.jpg",
+        image: mission10,
         type: "à domicile"
     }
 ];

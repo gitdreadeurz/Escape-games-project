@@ -9,6 +9,7 @@ const JWT_SECRET = process.env.DB_JWT_SECRET;
 
 export async function newUser(req, res) {
 
+    console.log("back");
 
     try {
         const { nom, prenom, telephone, mail, mot_de_passe, date_anniv } = req.body;

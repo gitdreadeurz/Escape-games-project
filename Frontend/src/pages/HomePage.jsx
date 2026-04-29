@@ -1,52 +1,54 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
-import { missions } from '../data/missions';
 import MissionCard from '../components/MissionCard';
+import { missions } from '../data/missions';
 import { Link } from 'react-router-dom';
-import heroImage from "../assets/hero.webp";
+import heroImage from '../assets/hero.webp';
 
 function HomePage() {
-    const missionsSurSite = missions.filter(m => m.type === "sur site").slice(0, 3);
-    const missionsADomicile = missions.filter(m => m.type === "à domicile").slice(0, 3);
+  const missionsPreview = missions.slice(0, 3);
 
-    return (
-        <div className="page">
-            <Navbar />
-            <section className="hero">
-                <h1>Bienvenue</h1>
-                <p>
-                    Prêt à relever le défi ? Que ce soit dans l'immersion totale de nos salles 
-                    thématiques ou directement dans votre salon, nous transformons votre réalité 
-                    en une aventure inoubliable. Découvrez nos scénarios captivants et choisissez 
-                    votre terrain de jeu : chez nous ou chez vous, l'évasion n'attend que vous !
-                </p>
-                <div style={{ marginTop: '2rem' }}>
-                    <Link to="/reservation">
-                        <Button text="Réserver" variant="primary" />
-                    </Link>
-                </div>
-            </section>
-            
-            <section className="page-content">
-                <h2>Les Missions sur site</h2>
-                <div className="missions-grid">
-                    {missionsSurSite.map(mission => (
-                        <MissionCard key={mission.id} mission={mission} />
-                    ))}
-                </div>
-                
-                <h2 style={{ marginTop: '2rem' }}>Les Missions à domicile</h2>
-                <div className="missions-grid">
-                    {missionsADomicile.map(mission => (
-                        <MissionCard key={mission.id} mission={mission} />
-                    ))}
-                </div>
-            </section>
-            
-            <Footer />
-        </div>
-    );
+  return (
+    <div className="page">
+      <Navbar />
+
+      <main className="homepage">
+        <section className="hero">
+          <img src={heroImage} alt="Escape Room" className="hero-image" />
+
+          <div className="hero-intro">
+            <h1>Bienvenue</h1>
+
+            <p>
+              Prêt à relever le défi ? Que ce soit dans l&apos;immersion totale
+              de nos salles thématiques ou directement dans votre salon, nous
+              transformons votre réalité en une aventure inoubliable.
+              Découvrez nos scénarios captivants et choisissez votre terrain de
+              jeu : chez nous ou chez vous, l&apos;évasion n&apos;attend que
+              vous !
+            </p>
+          </div>
+        </section>
+
+        <section className="missions-section">
+          <div className="missions-grid">
+            {missionsPreview.map((mission) => (
+              <MissionCard key={mission.id} game={mission} />
+            ))}
+          </div>
+
+          <div className="home-reservation">
+            <Link to="/reservation">
+              <Button text="Réserver cette mission" variant="primary" />
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
 
 export default HomePage;

@@ -55,7 +55,6 @@ function MissionsPage() {
                     </div>
                 </section> */}
             </div>
-            <Footer />
         </div>
     );
 }
