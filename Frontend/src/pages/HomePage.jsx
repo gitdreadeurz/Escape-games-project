@@ -8,22 +8,26 @@ import { getAllGames } from '../../service';
 import { useEffect, useState } from 'react';
 
 function HomePage() {
-    const [games, setGames] = useState([]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
-    const fetchGames = async () => {
-        try {
-            const response = await getAllGames();
-            setGames(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  const [games, setGames] = useState([]);
 
-    useEffect(() => {
-        fetchGames();
-    }, []);
+  const fetchGames = async () => {
+    try {
+      const response = await getAllGames();
+      setGames(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const missionsPreview = games.slice(0, 3);
+  useEffect(() => {
+    fetchGames();
+  }, []);
+
+  const missionsPreview = games.slice(0, 3);
 
   return (
     <div className="page">
@@ -55,8 +59,8 @@ function HomePage() {
           </div>
 
           <div className="home-reservation">
-            <Link to="/reservation">
-              <Button text="Réserver cette mission" variant="primary" />
+            <Link to="/missions">
+              <Button text="Voir toutes les missions" variant="primary" />
             </Link>
           </div>
         </section>

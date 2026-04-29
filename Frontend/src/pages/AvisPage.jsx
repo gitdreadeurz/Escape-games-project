@@ -1,33 +1,65 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
+import Pagination from "@mui/material/Pagination";
+
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { getAllAvis } from '../../service';
+import { getAllGames } from '../../service';
+import { addAvis } from '../../service';
+import { jwtDecode } from 'jwt-decode';
+
+
+
 
 function AvisPage() {
-    //     const avis = [
-    //         { id: 1, name: "Marie D.", note: 5, text: "Expérience incroyable ! Le manoir hanté nous a fait peur." },
-    //         { id: 2, name: "Jean P.", note: 4, text: "Très bon moment en équipe. Énigmes bien pensées." },
-    //         { id: 3, name: "Sophie L.", note: 5, text: "Parfait pour un anniversaire. Je recommande !" }
-    //     ];
-
-    const [avis, setAvis] = useState([]);
-    const [isLoged, setIsLoged] = useState(false);
 
     useEffect(() => {
-    if (localStorage.getItem('token')) {
-        setIsLoged(true);
-    } else {
-        setIsLoged(false);
-    }
-}, []);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
-    console.log(localStorage.getItem('token'));
+    const navigate = useNavigate();
+    const token = localStorage.getItem('token');
+
+    // Décoder le token s'il existe
+    let decoded = null;
+    if (token) {
+        try {
+            decoded = jwtDecode(token);
+        } catch (error) {
+            console.error('Token invalide:', error);
+            localStorage.removeItem('token');
+        }
+    }
+
+    const [avis, setAvis] = useState([]);
+    const [page, setPage] = useState(1);
+    const pageSize = 5;
+    const offset = (page - 1) * pageSize;
+
+    const [escape_game, setEscape_game] = useState([]);
+    const [isLoged, setIsLoged] = useState(!!token && decoded !== null);
+    const [newReview, setNewReview] = useState({
+        user_id: decoded?.user_id || "",
+        game_id: "",
+        notation: 5,
+        commentaire: ""
+    });
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            setIsLoged(true);
+        } else {
+            setIsLoged(false);
+        }
+    }, []);
+
 
     const fetchAvis = async () => {
 
         try {
-            const response = await getAllAvis();
+            const response = await getAllAvis(page);
             console.log(response);
             setAvis(response.data);
         } catch (error) {
@@ -35,17 +67,61 @@ function AvisPage() {
         }
     };
 
+    const handleChangePage = (_event, value) => {
+        setPage(value);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const fetchGames = async () => {
+
+        try {
+            const response = await getAllGames();
+            console.log(response);
+            setEscape_game(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
+
+
+
     useEffect(() => {
         fetchAvis();
+        fetchGames();
+
     }, []);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert('Avis envoyé !');
+
+        // Vérifier que les données sont complètes
+        if (!newReview.game_id || !newReview.commentaire) {
+            alert('Veuillez remplir tous les champs');
+            return;
+        }
+
+        addAvis(newReview)
+            .then(response => {
+                console.log(response);
+                alert('Avis envoyé !');
+                // Réinitialiser le formulaire
+                setNewReview({
+                    user_id: decoded?.user_id || "",
+                    game_id: "",
+                    notation: 5,
+                    commentaire: ""
+                });
+            })
+            .catch(error => {
+                console.error('Erreur lors de l\'envoi de l\'avis:', error);
+                alert('Erreur lors de l\'envoi de l\'avis.');
+            });
     };
 
- 
+
 
     return (
         <div className="page">
@@ -54,7 +130,7 @@ function AvisPage() {
                 <h1>Avis de nos Clients</h1>
 
                 <div style={{ marginTop: '2rem' }}>
-                    {avis.map(avis => (
+                    {avis.slice(offset, offset + pageSize).map(avis => (
                         <div key={avis.id} style={{
                             background: 'white',
                             color: 'black',
@@ -72,18 +148,48 @@ function AvisPage() {
                         </div>
                     ))}
                 </div>
+                <Pagination
+                    count={offset + pageSize >= avis.length ? page : page + 1} // Affiche une page de plus si on n'est pas à la fin
+                    page={page}
+                    onChange={handleChangePage}
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        margin: '20px 0',
+                        '& .MuiButtonBase-root': {
+                            color: '#f4a321'
+                        },
+                        '& .Mui-selected': {
+                            backgroundColor: '#f4a321 !important',
+                            boxShadow: '0 4px 12px rgba(244, 163, 33, 0.3)',
+                            color: '#000000 !important'
+                        }
+                    }}
+                />
                 {isLoged ? (
                     <>
                         <h2 style={{ marginTop: '3rem' }} >Laisser un avis</h2>
                         <form onSubmit={handleSubmit} style={{ maxWidth: '600px', marginTop: '1rem' }}>
                             <div className="form-group">
                                 <label htmlFor="name">Nom</label>
-                                <input type="text" id="name" required />
+                                <input style={{ backgroundColor: 'white' }} type="text" id="name" placeholder={decoded ? decoded.prenom + ' ' + decoded.nom : ''} disabled />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="Escape-Game">Nom de la mission</label>
+                                <select id="Escape-Game" value={newReview.game_id} required onChange={(e) => setNewReview({ ...newReview, game_id: e.target.value })}>
+                                    <option value="">Sélectionner une mission</option>
+                                    {escape_game.map(game => (
+                                        <option key={game.game_id} value={game.game_id}>
+                                            {game.titre}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="note">Note</label>
-                                <select id="note" required>
+                                <select id="note" value={newReview.notation} required onChange={(e) => setNewReview({ ...newReview, notation: parseInt(e.target.value) })}>
                                     <option value="5">5 étoiles</option>
                                     <option value="4">4 étoiles</option>
                                     <option value="3">3 étoiles</option>
@@ -94,13 +200,14 @@ function AvisPage() {
 
                             <div className="form-group">
                                 <label htmlFor="comment">Commentaire</label>
-                                <textarea id="comment" rows="4" required></textarea>
+                                <textarea id="comment" rows="4" style={{ resize: "none" }}  value={newReview.commentaire} required onChange={(e) => setNewReview({ ...newReview, commentaire: e.target.value })}></textarea>
                             </div>
 
                             <Button text="Envoyer" variant="primary" type="submit" />
                         </form>
+
                     </>
-                ):( <h2>Connectez vous pour laisser un avis</h2>)}
+                ) : (<button onClick={() => navigate("/inscription")}>Pour laisser un avis, veuillez vous connecter en cliquant ici</button>)}
             </div>
             <Footer />
         </div>

@@ -2,8 +2,14 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import conceptImage from '../assets/concept.webp';
 import heroImage from '../assets/heroConcept.webp';
+import { useEffect} from "react";
+
 
 function ConceptPage() {
+  useEffect(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}, []);
+
   return (
     <div className="page">
       <Navbar />

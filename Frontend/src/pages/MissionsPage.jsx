@@ -4,6 +4,10 @@ import { getAllGames } from '../../service';
 import { useEffect, useState } from 'react';
 
 function MissionsPage() {
+  useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
+  
   const [games, setGames] = useState([]);
 
   const missionsSurSite = games.filter(

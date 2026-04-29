@@ -2,7 +2,17 @@ import axios from "axios";
 
 export const client = axios.create({
     baseURL: "http://localhost:3000"
+});
 
+// Interceptor pour ajouter le token à chaque requête
+client.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
 });
 
 // Fonctions pour les users
@@ -115,16 +125,16 @@ export function deletePayment(id){
 
 // Fonctions pour les avis
 
-export function getAllAvis(){
-    return client.get('/avis')
+export function getAllAvis(page = 1){
+    return client.get('/avis', { params: { page } })
 }
 
 export function getAvisById(id){
     return client.get(`/avis/${id}`)
 }
 
-export function addAvis(){
-    return client.post('/avis')
+export function addAvis(data){
+    return client.post('/avis', data)
 }
 
 export function updateAvis(id){
