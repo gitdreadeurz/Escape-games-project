@@ -1,6 +1,8 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
+import Pagination from "@mui/material/Pagination";
+
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { getAllAvis } from '../../service';
@@ -10,9 +12,14 @@ import { jwtDecode } from 'jwt-decode';
 
 
 function AvisPage() {
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
+
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
-    
+
     // Décoder le token s'il existe
     let decoded = null;
     if (token) {
@@ -25,6 +32,10 @@ function AvisPage() {
     }
 
     const [avis, setAvis] = useState([]);
+    const [page, setPage] = useState(1);
+    const pageSize = 5;
+    const offset = (page - 1) * pageSize;
+
     const [escape_game, setEscape_game] = useState([]);
     const [isLoged, setIsLoged] = useState(!!token && decoded !== null);
     const [newReview, setNewReview] = useState({
@@ -46,12 +57,17 @@ function AvisPage() {
     const fetchAvis = async () => {
 
         try {
-            const response = await getAllAvis();
+            const response = await getAllAvis(page);
             console.log(response);
             setAvis(response.data);
         } catch (error) {
             console.error(error);
         }
+    };
+
+    const handleChangePage = (_event, value) => {
+        setPage(value);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const fetchGames = async () => {
@@ -78,7 +94,7 @@ function AvisPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         // Vérifier que les données sont complètes
         if (!newReview.game_id || !newReview.commentaire) {
             alert('Veuillez remplir tous les champs');
@@ -112,7 +128,7 @@ function AvisPage() {
                 <h1>Avis de nos Clients</h1>
 
                 <div style={{ marginTop: '2rem' }}>
-                    {avis.map(avis => (
+                    {avis.slice(offset, offset + pageSize).map(avis => (
                         <div key={avis.id} style={{
                             background: 'white',
                             color: 'black',
@@ -130,19 +146,37 @@ function AvisPage() {
                         </div>
                     ))}
                 </div>
+                <Pagination
+                    count={offset + pageSize >= avis.length ? page : page + 1} // Affiche une page de plus si on n'est pas à la fin
+                    page={page}
+                    onChange={handleChangePage}
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        margin: '20px 0',
+                        '& .MuiButtonBase-root': {
+                            color: '#f4a321'
+                        },
+                        '& .Mui-selected': {
+                            backgroundColor: '#f4a321 !important',
+                            boxShadow: '0 4px 12px rgba(244, 163, 33, 0.3)',
+                            color: '#000000 !important'
+                        }
+                    }}
+                />
                 {isLoged ? (
                     <>
                         <h2 style={{ marginTop: '3rem' }} >Laisser un avis</h2>
                         <form onSubmit={handleSubmit} style={{ maxWidth: '600px', marginTop: '1rem' }}>
                             <div className="form-group">
                                 <label htmlFor="name">Nom</label>
-                                <input style={{ backgroundColor: 'white'}} type="text" id="name" placeholder={decoded ? decoded.prenom + ' ' + decoded.nom : ''} disabled />
+                                <input style={{ backgroundColor: 'white' }} type="text" id="name" placeholder={decoded ? decoded.prenom + ' ' + decoded.nom : ''} disabled />
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="Escape-Game">Nom du jeu</label>
+                                <label htmlFor="Escape-Game">Nom de la mission</label>
                                 <select id="Escape-Game" value={newReview.game_id} required onChange={(e) => setNewReview({ ...newReview, game_id: e.target.value })}>
-                                    <option value="">Sélectionner un jeu</option>
+                                    <option value="">Sélectionner une mission</option>
                                     {escape_game.map(game => (
                                         <option key={game.game_id} value={game.game_id}>
                                             {game.titre}
@@ -164,7 +198,7 @@ function AvisPage() {
 
                             <div className="form-group">
                                 <label htmlFor="comment">Commentaire</label>
-                                <textarea id="comment" rows="4" value={newReview.commentaire} required onChange={(e) => setNewReview({ ...newReview, commentaire: e.target.value })}></textarea>
+                                <textarea id="comment" rows="4" style={{ resize: "none" }}  value={newReview.commentaire} required onChange={(e) => setNewReview({ ...newReview, commentaire: e.target.value })}></textarea>
                             </div>
 
                             <Button text="Envoyer" variant="primary" type="submit" />

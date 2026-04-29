@@ -8,6 +8,10 @@ import { getAllGames, deleteGame } from '../../service';
 import { useEffect, useState } from 'react';
 
 function HomePage() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   const [games, setGames] = useState([]);
 
   const fetchGames = async () => {
@@ -58,8 +62,8 @@ function HomePage() {
           </div>
 
           <div className="home-reservation">
-            <Link to="/reservation">
-              <Button text="Réserver cette mission" variant="primary" />
+            <Link to="/missions">
+              <Button text="Voir toutes les missions" variant="primary" />
             </Link>
           </div>
         </section>
