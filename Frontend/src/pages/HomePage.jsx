@@ -4,26 +4,26 @@ import Button from '../components/Button';
 import MissionCard from '../components/MissionCard';
 import { Link } from 'react-router-dom';
 import heroImage from '../assets/hero.webp';
-import { getAllGames } from '../../service';
+import { getAllGames, deleteGame } from '../../service';
 import { useEffect, useState } from 'react';
 
 function HomePage() {
-    const [games, setGames] = useState([]);
+  const [games, setGames] = useState([]);
 
-    const fetchGames = async () => {
-        try {
-            const response = await getAllGames();
-            setGames(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  const fetchGames = async () => {
+    try {
+      const response = await getAllGames();
+      setGames(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    useEffect(() => {
-        fetchGames();
-    }, []);
+  useEffect(() => {
+    fetchGames();
+  }, []);
 
-    const missionsPreview = games.slice(0, 3);
+  const missionsPreview = games.slice(0, 3);
 
   return (
     <div className="page">
@@ -50,7 +50,10 @@ function HomePage() {
         <section className="missions-section">
           <div className="missions-grid">
             {missionsPreview.map((mission) => (
-              <MissionCard key={mission.id} game={mission} />
+              <MissionCard
+                key={mission.id}
+                game={mission}
+              />
             ))}
           </div>
 

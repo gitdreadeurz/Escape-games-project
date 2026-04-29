@@ -9,8 +9,6 @@ import { addAvis } from '../../service';
 import { jwtDecode } from 'jwt-decode';
 
 
-
-
 function AvisPage() {
     const navigate = useNavigate();
     const token = localStorage.getItem('token');

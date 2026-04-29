@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Button from './Button';
 
 function MissionCard({ game, onDelete, userRole }) {
-    const canDelete = userRole === 'admin' || userRole === 'superAdmin';
+    const canDelete = userRole === 'admin' || userRole === 'superadmin';
 
     return (
         <div className="mission-card">
