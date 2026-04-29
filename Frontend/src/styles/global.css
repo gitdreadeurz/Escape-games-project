@@ -389,3 +389,101 @@ body {
     font-size: 24px;
   }
 }
+.missions-page {
+  padding: 55px 50px 100px;
+  background:
+    radial-gradient(circle at top left, rgba(245, 166, 35, 0.14), transparent 30%),
+    radial-gradient(circle at top right, rgba(75, 148, 232, 0.14), transparent 28%),
+    #1f2033;
+}
+
+.missions-header {
+  max-width: 850px;
+  margin: 0 auto 70px;
+  text-align: center;
+}
+
+.missions-kicker {
+  color: #4b94e8;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.missions-header h1 {
+  margin: 10px 0;
+  color: #f5a623;
+  font-size: 48px;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 0 0 24px rgba(245, 166, 35, 0.35);
+}
+
+.missions-header p {
+  color: #e7e7ef;
+  font-size: 17px;
+}
+
+.missions-section {
+  max-width: 1250px;
+  margin: 0 auto 85px;
+}
+
+.missions-section h2 {
+  margin-bottom: 34px;
+  color: white;
+  font-size: 32px;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+/* OVERLAY IMAGE */
+
+.mission-card-image {
+  position: relative;
+}
+
+.mission-card-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* TOP BADGES */
+
+.mission-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* INFOS GRID */
+
+.mission-infos {
+  margin-top: 12px;
+}
+
+.mission-infos p {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.mission-infos span {
+  color: #ddd;
+}
+
+/* BUTTON FIX */
+
+.mission-button-link {
+  display: block;
+  margin-top: 20px;
+}
