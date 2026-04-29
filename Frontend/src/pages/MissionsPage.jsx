@@ -6,7 +6,11 @@ import { getAllGames } from '../../service';
 import { useEffect, useState } from 'react';
 
 function MissionsPage() {
-    
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
+
     const [games, setGames] = useState([]);
     const missionsSurSite = games.filter(m => m.localisation === "Paris" || m.localisation === "Lille" || m.localisation === "Lyon");
     const missionsADomicile = games.filter(m => m.localisation === "domicile");
@@ -36,7 +40,7 @@ function MissionsPage() {
                   ))}
                 </div> */}
                 <h1>Nos Missions</h1>
-                
+
                 <section style={{ marginTop: '2rem' }}>
                     <h2>Les Missions sur site</h2>
                     <div className="missions-grid">
@@ -45,7 +49,7 @@ function MissionsPage() {
                         ))}
                     </div>
                 </section>
-                
+
                 <section style={{ marginTop: '3rem' }}>
                     <h2>Les Missions à domicile</h2>
                     <div className="missions-grid">
