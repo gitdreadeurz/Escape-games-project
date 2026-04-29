@@ -6,10 +6,10 @@ import { getAllGames } from '../../service';
 import { useEffect, useState } from 'react';
 
 function MissionsPage() {
-    const missionsSurSite = missions.filter(m => m.type === "sur site");
-    const missionsADomicile = missions.filter(m => m.type === "à domicile");
     
     const [games, setGames] = useState([]);
+    const missionsSurSite = games.filter(m => m.localisation === "Paris" || m.localisation === "Lille" || m.localisation === "Lyon");
+    const missionsADomicile = games.filter(m => m.localisation === "domicile");
 
     const fetchGames = async () => {
         try {
@@ -29,19 +29,19 @@ function MissionsPage() {
         <div className="page">
             <Navbar />
             <div className="page-content">
-                <h1>Nos missions</h1>
+                {/* <h1>Nos missions</h1>
                 <div className="missions-grid">
                   {games.map((game) => (
                     <MissionCard key={game.id} game={game} />
                   ))}
-                </div>
-                {/* <h1>Nos Missions</h1>
+                </div> */}
+                <h1>Nos Missions</h1>
                 
                 <section style={{ marginTop: '2rem' }}>
                     <h2>Les Missions sur site</h2>
                     <div className="missions-grid">
-                        {missionsSurSite.map(mission => (
-                            <MissionCard key={mission.id} mission={mission} />
+                        {missionsSurSite.map(game => (
+                            <MissionCard key={game.id} game={game} />
                         ))}
                     </div>
                 </section>
@@ -49,11 +49,11 @@ function MissionsPage() {
                 <section style={{ marginTop: '3rem' }}>
                     <h2>Les Missions à domicile</h2>
                     <div className="missions-grid">
-                        {missionsADomicile.map(mission => (
-                            <MissionCard key={mission.id} mission={mission} />
+                        {missionsADomicile.map(game => (
+                            <MissionCard key={game.id} game={game} />
                         ))}
                     </div>
-                </section> */}
+                </section>
             </div>
         </div>
     );
