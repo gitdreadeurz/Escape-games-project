@@ -176,9 +176,9 @@ function AvisPage() {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="Escape-Game">Nom du jeu</label>
+                                <label htmlFor="Escape-Game">Nom de la mission</label>
                                 <select id="Escape-Game" value={newReview.game_id} required onChange={(e) => setNewReview({ ...newReview, game_id: e.target.value })}>
-                                    <option value="">Sélectionner un jeu</option>
+                                    <option value="">Sélectionner une mission</option>
                                     {escape_game.map(game => (
                                         <option key={game.game_id} value={game.game_id}>
                                             {game.titre}
@@ -200,7 +200,7 @@ function AvisPage() {
 
                             <div className="form-group">
                                 <label htmlFor="comment">Commentaire</label>
-                                <textarea id="comment" rows="4" value={newReview.commentaire} required onChange={(e) => setNewReview({ ...newReview, commentaire: e.target.value })}></textarea>
+                                <textarea id="comment" rows="4" style={{ resize: "none" }}  value={newReview.commentaire} required onChange={(e) => setNewReview({ ...newReview, commentaire: e.target.value })}></textarea>
                             </div>
 
                             <Button text="Envoyer" variant="primary" type="submit" />
