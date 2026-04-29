@@ -34,7 +34,7 @@ function HomePage() {
         <section className="missions-section">
           <div className="missions-grid">
             {missionsPreview.map((mission) => (
-              <MissionCard key={mission.id} mission={mission} />
+              <MissionCard key={mission.id} game={mission} />
             ))}
           </div>
 
