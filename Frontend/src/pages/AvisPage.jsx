@@ -11,8 +11,6 @@ import { addAvis } from '../../service';
 import { jwtDecode } from 'jwt-decode';
 
 
-
-
 function AvisPage() {
 
     useEffect(() => {
