@@ -14,6 +14,11 @@ import { jwtDecode } from 'jwt-decode';
 
 
 function AvisPage() {
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
+
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
@@ -62,7 +67,7 @@ function AvisPage() {
         }
     };
 
-     const handleChangePage = (_event,value ) => {
+    const handleChangePage = (_event, value) => {
         setPage(value);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
