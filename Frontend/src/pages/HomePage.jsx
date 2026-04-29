@@ -59,8 +59,8 @@ function HomePage() {
           </div>
 
           <div className="home-reservation">
-            <Link to="/reservation">
-              <Button text="Réserver cette mission" variant="primary" />
+            <Link to="/missions">
+              <Button text="Voir toutes les missions" variant="primary" />
             </Link>
           </div>
         </section>
