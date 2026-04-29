@@ -3,8 +3,10 @@ import Footer from '../components/Footer';
 import Button from '../components/Button';
 import '../styles/InscriptionPage.css';
 import { registerUser } from '../../service';
-import {loginUser} from '../../service';
+import { loginUser } from '../../service';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 function login() {
 
@@ -24,6 +26,7 @@ function login() {
             [e.target.id]: e.target.value
         });
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -32,7 +35,6 @@ function login() {
             alert('Inscription réussie !');
         } catch (error) {
             console.error(error);
-
             alert('Erreur lors de l\'inscription. Veuillez réessayer.');
         }
     }
@@ -50,16 +52,15 @@ function login() {
         });
     }
 
+    const navigate = useNavigate();
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await loginUser(loginData);
             console.log(response.data.token);
             localStorage.setItem('token', response.data.token);
-
-            
-
             alert('Connexion réussie !');
+            navigate('/'); // Redirige vers la page d'accueil après la connexion
         } catch (error) {
             console.error(error);
             alert('Erreur lors de la connexion. Veuillez vérifier vos identifiants.');
@@ -70,7 +71,7 @@ function login() {
         <div className="page">
             <Navbar />
             <div className="page-content">
-                < form onSubmit={handleLoginSubmit}>
+                <form onSubmit={handleLoginSubmit}>
                     <div className='connexion'>
                         <h1>Connexion</h1>
                         <p>Connectez-vous pour accéder à vos réservations et avis.</p>

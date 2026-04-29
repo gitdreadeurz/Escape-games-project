@@ -15,12 +15,12 @@ function AvisPage() {
     const [isLoged, setIsLoged] = useState(false);
 
     useEffect(() => {
-    if (localStorage.getItem('token')) {
-        setIsLoged(true);
-    } else {
-        setIsLoged(false);
-    }
-}, []);
+        if (localStorage.getItem('token')) {
+            setIsLoged(true);
+        } else {
+            setIsLoged(false);
+        }
+    }, []);
 
     console.log(localStorage.getItem('token'));
 
@@ -45,7 +45,7 @@ function AvisPage() {
         alert('Avis envoyé !');
     };
 
- 
+
 
     return (
         <div className="page">
@@ -100,7 +100,7 @@ function AvisPage() {
                             <Button text="Envoyer" variant="primary" type="submit" />
                         </form>
                     </>
-                ):( <h2>Connectez vous pour laisser un avis</h2>)}
+                ) : (<h2>Connectez vous pour laisser un avis</h2>)}
             </div>
             <Footer />
         </div>

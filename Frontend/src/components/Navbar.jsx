@@ -1,7 +1,20 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.webp";
+import { useEffect, useState } from "react";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const [isLoged, setIsLoged] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setIsLoged(true);
+    } else {
+      setIsLoged(false);
+    }
+  }, []);
+
   return (
     <header className="navbar">
       <div className="brand">
@@ -9,13 +22,32 @@ function Navbar() {
         <span>Escape Room</span>
       </div>
 
+
       <nav className="nav-links">
-        <Link to="/">Accueil</Link>
-        <Link to="/concept">Le concept</Link>
-        <Link to="/missions">Les missions</Link>
-        <Link to="/avis">Les avis</Link>
-        <Link to="/inscription">Connexion / Inscription</Link>
-        <Link to="/reservation" className="nav-reserve">Réservez</Link>
+        <button onClick={() => {
+          navigate('/')
+        }}>Accueil</button>
+        <button onClick={() => {
+          navigate('/concept')
+        }}>Le concept</button>
+        <button onClick={() => {
+          navigate('/missions')
+        }}>Les missions</button>
+        <button onClick={() => {
+          navigate('/avis')
+        }}>Les avis</button>
+
+
+        {isLoged ? <button style={{ backgroundColor: 'red' , color :"white " }} onClick={() => {
+          localStorage.removeItem('token');
+          setIsLoged(false);
+          navigate('/');
+        }}>Déconnexion</button> : <button onClick={() => {
+          navigate('/inscription')
+        }}>Connexion / Inscription</button>}
+        <button onClick={() => {
+          navigate('/reservation')
+        }} className="nav-reserve">Réservez</button>
       </nav>
     </header>
   );
