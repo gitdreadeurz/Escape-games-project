@@ -2,12 +2,28 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
 import MissionCard from '../components/MissionCard';
-import { missions } from '../data/missions';
 import { Link } from 'react-router-dom';
 import heroImage from '../assets/hero.webp';
+import { getAllGames } from '../../service';
+import { useEffect, useState } from 'react';
 
 function HomePage() {
-  const missionsPreview = missions.slice(0, 3);
+    const [games, setGames] = useState([]);
+
+    const fetchGames = async () => {
+        try {
+            const response = await getAllGames();
+            setGames(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchGames();
+    }, []);
+
+    const missionsPreview = games.slice(0, 3);
 
   return (
     <div className="page">
