@@ -121,7 +121,7 @@ export function updatePayment(id){
 }
 
 export function deletePayment(id){
-    return client.delete(`/paiement/${id}`)
+    return client.delete(`/paiement/${id}`, { data: { estSupprime: 1 } })
 }
 
 // Fonctions pour les avis

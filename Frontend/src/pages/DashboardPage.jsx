@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { getAllReservations, getAllUsers,getAllPayments, sofDelUser, deleteReservation } from "../../service";
+import { getAllReservations, getAllUsers, sofDelUser, deleteReservation, getAllPayments, deletePayment } from "../../service";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import '../styles/Dashboard.css';
@@ -83,6 +83,18 @@ function DashboardPage() {
         }
     };
 
+    const handleDeletePayment = async (paiementId) => {
+        if (window.confirm('Supprimer ce paiement ?')) {
+            try {
+                await deletePayment(paiementId);
+                console.log(`${paiementId} a été supprimé`);
+                setPaiements(paiements.filter(p => p.paiement_id !== paiementId));
+            } catch (error) {
+                console.error("Erreur lors de la suppression du paiement :", error);
+            }
+        }
+    };
+
     useEffect(() => {
         fetchReservations();
         fetchUsers();
@@ -139,14 +151,15 @@ function DashboardPage() {
                     <h2>Liste des paiements</h2>
                     {paiements.length > 0 ? (
                         <ul>
-                            {paiements.map(paiement => (
-                                <li key={paiement.id}>
+                            {paiements.filter(p => p.estSupprime !== 1).map(paiement => (
+                                <li key={paiement.paiement_id}>
                                     <h4>titre : {paiement.titre}</h4>
                                     <h5>Utilisateur : {paiement.prenom} {paiement.nom}</h5>
                                     <p>Montant : {paiement.montant}€</p>
                                     <p>Mode de paiement : {paiement.mode_paiement}</p>
                                     <p>Statut : {paiement.statut}</p>
                                     <p>promo : {paiement.promo}€</p>
+                                    <button onClick={() => handleDeletePayment(paiement.paiement_id)} className="delete-button">Supprimer</button>
                                 </li>
                             ))}
                         </ul>
