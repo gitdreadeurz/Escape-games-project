@@ -23,8 +23,8 @@ function AvisPage() {
     if (token) {
         try {
             decoded = jwtDecode(token);
-            console.log(decoded.role);
-
+            
+            
         } catch (error) {
             console.error('Token invalide:', error);
             localStorage.removeItem('token');
@@ -167,16 +167,16 @@ function AvisPage() {
                     <section className="avis-form-section">
                         <h2>Laisser un avis</h2>
 
-                        <form onSubmit={handleSubmit} className="avis-form">
-                            <div className="form-group">
-                                <label htmlFor="name">Nom</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    placeholder={decoded ? `${decoded.prenom} ${decoded.nom}` : ''}
-                                    disabled
-                                />
-                            </div>
+            <form onSubmit={handleSubmit} className="reservation-form">
+              <div className="form-group">
+                <label htmlFor="name">Nom</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder={decoded ? `${decoded.prenom} ${decoded.nom}` : ''}
+                  disabled
+                />
+              </div>
 
                             <div className="form-group">
                                 <label htmlFor="Escape-Game">Nom de la mission</label>
@@ -218,18 +218,19 @@ function AvisPage() {
                                 </select>
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="comment">Commentaire</label>
-                                <textarea
-                                    id="comment"
-                                    rows="4"
-                                    value={newReview.commentaire}
-                                    required
-                                    onChange={(e) =>
-                                        setNewReview({ ...newReview, commentaire: e.target.value })
-                                    }
-                                ></textarea>
-                            </div>
+              <div className="form-group">
+                <label htmlFor="comment">Commentaire</label>
+                <textarea
+                  id="comment"
+                  rows="4"
+                  value={newReview.commentaire}
+                  required
+                  style={{ resize: 'none' }}
+                  onChange={(e) =>
+                    setNewReview({ ...newReview, commentaire: e.target.value })
+                  }
+                ></textarea>
+              </div>
 
                             <Button text="Envoyer" variant="primary" type="submit" />
                         </form>

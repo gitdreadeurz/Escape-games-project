@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { getAllReservations, getAllUsers,getAllPayments } from "../../service";
+import { getAllReservations, getAllUsers,getAllPayments, sofDelUser, deleteReservation } from "../../service";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import '../styles/Dashboard.css';
@@ -48,6 +48,30 @@ function DashboardPage() {
         }
     };
 
+    const handleDeleteUser = async (userId) => {
+        if (window.confirm('Supprimer cet utilisateur ?')) {
+            try {
+                await sofDelUser(userId);
+                console.log(`${userId} a été supprimé`);
+                setUsers(users.filter(u => u.user_id !== userId));
+            } catch (error) {
+                console.error("Erreur lors de la suppression de l'utilisateur :", error);
+            }
+        }
+    };
+
+    const handleDeleteReservation = async (reservationId) => {
+        if (window.confirm('Supprimer cette réservation ?')) {
+            try {
+                await deleteReservation(reservationId);
+                console.log(`${reservationId} a été supprimé`);
+                setReservations(reservations.filter(r => r.reservation_id !== reservationId));
+            } catch (error) {
+                console.error("Erreur lors de la suppression de la réservation :", error);
+            }
+        }
+    };
+
     useEffect(() => {
         fetchReservations();
         fetchUsers();
@@ -64,10 +88,11 @@ function DashboardPage() {
                     <h2>Vos réservations</h2>
                     {reservations.length > 0 ? (
                         <ul>
-                            {reservations.map(reservation => (
-                                <li key={reservation.id}>
+                            {reservations.filter(r => r.estSupprime !== 1).map(reservation => (
+                                <li key={reservation.reservation_id}>
                                     <p>Jeu : {reservation.titre}</p>
                                     <p>Date de réservation : {reservation.date_reservation}</p>
+                                    <button onClick={() => handleDeleteReservation(reservation.reservation_id)} className="delete-button">Supprimer</button>
                                 </li>
                             ))}
                         </ul>
@@ -80,10 +105,12 @@ function DashboardPage() {
                     <h2>Liste des utilisateurs</h2>
                     {users.length > 0 ? (
                         <ul>
-                            {users.map(users => (
+                            {users.filter(user => user.estSupprime !== 1).map(users => (
                                 <li key={users.user_id}>
                                     <p>{users.prenom + ' ' + users.nom}</p>
                                     <p>Rôle : {users.role}</p>
+                                    <button onClick={() => handleDeleteUser(users.user_id)} className="delete-button">Supprimer</button>
+                                    <button className="edit-button">Passer Admin</button>
                                 </li>
                             ))}
                         </ul>
