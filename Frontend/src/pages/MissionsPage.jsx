@@ -44,7 +44,7 @@ function MissionsPage() {
         if (window.confirm('Supprimer cette mission ?')) {
             try {
                 await deleteGame(id);
-                setGames(games.filter(g => g.id !== id));
+                setGames(games.filter(g => g.game_id !== id));
             } catch (error) {
                 console.error(error);
             }
@@ -71,7 +71,7 @@ function MissionsPage() {
                 <section className="missions-section">
                     <h2>Les Missions sur site</h2>
                     <div className="missions-grid">
-                        {missionsSurSite.map(game => (
+                        {missionsSurSite.filter(game => !game.estSupprime).map(game => (
                             <MissionCard
                                 key={game.id}
                                 game={game}
@@ -85,7 +85,7 @@ function MissionsPage() {
                 <section className="missions-section">
                     <h2>Les Missions à domicile</h2>
                     <div className="missions-grid">
-                        {missionsADomicile.map(game => (
+                        {missionsADomicile.filter(game => !game.estSupprime).map(game => (
                             <MissionCard
                                 key={game.id}
                                 game={game}

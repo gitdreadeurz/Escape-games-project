@@ -731,3 +731,7 @@ body {
     font-size: 36px;
   }
 }
+
+.btn-danger{
+  background-color: red;
+}
