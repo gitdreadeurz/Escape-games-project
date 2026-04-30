@@ -9,23 +9,16 @@ import { getAllAvis, getAllGames, addAvis } from '../../service';
 import { jwtDecode } from 'jwt-decode';
 
 function AvisPage() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
-
-    const navigate = useNavigate();
-    const token = localStorage.getItem('token');
-
-
-    // Décoder le token s'il existe
-    let decoded = null;
-    if (token) {
-        try {
-            decoded = jwtDecode(token);
-            console.log(decoded.role);
-            
-        } catch (error) {
-            console.error('Token invalide:', error);
-            localStorage.removeItem('token');
-        }
+  let decoded = null;
+  if (token) {
+    try {
+      decoded = jwtDecode(token);
+    } catch (error) {
+      console.error('Token invalide:', error);
+      localStorage.removeItem('token');
     }
   }
 
@@ -48,32 +41,21 @@ function AvisPage() {
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setIsLoged(true);
-    } else {
-      setIsLoged(false);
-    }
+    setIsLoged(!!localStorage.getItem('token'));
   }, []);
 
   const fetchAvis = async () => {
     try {
       const response = await getAllAvis(page);
-      console.log(response);
       setAvis(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleChangePage = (_event, value) => {
-    setPage(value);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const fetchGames = async () => {
     try {
       const response = await getAllGames();
-      console.log(response);
       setEscape_game(response.data);
     } catch (error) {
       console.error(error);
@@ -83,7 +65,12 @@ function AvisPage() {
   useEffect(() => {
     fetchAvis();
     fetchGames();
-  }, [page]);
+  }, []);
+
+  const handleChangePage = (_event, value) => {
+    setPage(value);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -94,8 +81,7 @@ function AvisPage() {
     }
 
     addAvis(newReview)
-      .then(response => {
-        console.log(response);
+      .then(() => {
         alert('Avis envoyé !');
         setNewReview({
           user_id: decoded?.user_id || '',
@@ -106,36 +92,41 @@ function AvisPage() {
         fetchAvis();
       })
       .catch(error => {
-        console.error('Erreur lors de l\'envoi de l\'avis:', error);
-        alert('Erreur lors de l\'envoi de l\'avis.');
+        console.error("Erreur lors de l'envoi de l'avis:", error);
+        alert("Erreur lors de l'envoi de l'avis.");
       });
   };
 
   return (
     <div className="page">
       <Navbar />
-      <main className="page-content">
-        <h1>Avis de nos Clients</h1>
 
-        <div style={{ marginTop: '2rem' }}>
-          {avis.slice(offset, offset + pageSize).map(avis => (
-            <div key={avis.id} style={{
-              background: 'white',
-              color: 'black',
-              padding: '1.5rem',
-              marginBottom: '1rem',
-              borderRadius: '8px',
-              boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <strong>{avis.User}</strong>
-                <p style={{ marginTop: '0.3rem', color: 'black' }}>{avis.Game}</p>
-                <span>{"⭐".repeat(avis.notation)}</span>
+      <main className="avis-container">
+        <section className="avis-hero">
+          <p className="avis-kicker">Avis clients</p>
+          <h1>Avis de nos Clients</h1>
+          <p>Découvrez les retours de nos joueurs après leur aventure.</p>
+        </section>
+
+        <section className="avis-list">
+          {avis.slice(offset, offset + pageSize).map(avisItem => (
+            <div key={avisItem.id} className="avis-card">
+              <div className="avis-header">
+                <div>
+                  <span className="avis-user">{avisItem.User}</span>
+                  <p className="avis-game">{avisItem.Game}</p>
+                </div>
+
+                <span className="avis-stars">
+                  {'⭐'.repeat(avisItem.notation)}
+                </span>
               </div>
-              <p style={{ marginTop: '0.5rem', color: 'black' }}>{avis.commentaire}</p>
+
+              <p className="avis-comment">{avisItem.commentaire}</p>
             </div>
           ))}
-        </div>
+        </section>
+
         <Pagination
           count={offset + pageSize >= avis.length ? page : page + 1}
           page={page}
@@ -143,13 +134,13 @@ function AvisPage() {
           sx={{
             display: 'flex',
             justifyContent: 'center',
-            margin: '20px 0',
+            margin: '28px 0 50px',
             '& .MuiButtonBase-root': {
-              color: '#f4a321'
+              color: '#f5a623'
             },
             '& .Mui-selected': {
-              backgroundColor: '#f4a321 !important',
-              boxShadow: '0 4px 12px rgba(244, 163, 33, 0.3)',
+              backgroundColor: '#f5a623 !important',
+              boxShadow: '0 4px 12px rgba(245, 166, 35, 0.35)',
               color: '#000000 !important'
             }
           }}
@@ -159,7 +150,7 @@ function AvisPage() {
           <section className="avis-form-section">
             <h2>Laisser un avis</h2>
 
-            <form onSubmit={handleSubmit} className="avis-form">
+            <form onSubmit={handleSubmit} className="reservation-form">
               <div className="form-group">
                 <label htmlFor="name">Nom</label>
                 <input
@@ -239,6 +230,6 @@ function AvisPage() {
       <Footer />
     </div>
   );
-
+}
 
 export default AvisPage;
