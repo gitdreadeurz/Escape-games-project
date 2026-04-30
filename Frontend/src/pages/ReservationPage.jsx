@@ -7,6 +7,8 @@ import { useLocation } from 'react-router-dom';
 
 function ReservationPage() {
 
+
+
     const [formData, setFormData] = useState({
         mission: "",
         localisation: "",
@@ -20,6 +22,36 @@ function ReservationPage() {
     const [options, setOptions] = useState([]);
     const location = useLocation();
     const selectedGameId = location.state?.gameId;
+
+    const optionsByGame = {
+        1: [1, 2],
+        2: [3, 4],
+        3: [5, 6],
+        4: [7, 8],
+        5: [9],
+        6: [10],
+        7: [11],
+        8: [12],
+        9: [13],
+        10: [14],
+    };
+
+    const filteredOptions = options.filter(opt =>
+        optionsByGame[formData.mission]?.includes(opt.option_id)
+    );
+
+    const generateTimeSlots = () => {
+        const slots = [];
+
+        for (let hour = 10; hour <= 22; hour++) {
+            const formatted = hour.toString().padStart(2, "0") + ":00";
+            slots.push(formatted);
+        }
+
+        return slots;
+    };
+
+    const timeSlots = generateTimeSlots();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -46,8 +78,6 @@ function ReservationPage() {
             try {
                 const data = await getAllGames();
 
-                console.log("DATA:", data);
-
                 const gamesArray = Array.isArray(data)
                     ? data
                     : data?.data || [];
@@ -67,8 +97,6 @@ function ReservationPage() {
         const fetchOptions = async () => {
             try {
                 const data = await getAllOptions();
-
-                console.log("OPTIONS:", data);
 
                 const optionsArray = Array.isArray(data)
                     ? data
@@ -96,7 +124,7 @@ function ReservationPage() {
                 [id]: value
             };
 
-            
+
 
             if (id === "mission") {
                 const selectedGame = games.find(
@@ -104,6 +132,8 @@ function ReservationPage() {
                 );
 
                 updated.localisation = selectedGame?.localisation || "";
+
+                updated.option = "";
             }
 
             return updated;
@@ -187,19 +217,11 @@ function ReservationPage() {
 
                     <div className="form-group">
                         <label>Localisation</label>
-                        <select
-                            id="localisation"
+                        <input
+                            type="text"
                             value={formData.localisation}
-                            onChange={handleChange}
-                        >
-                            <option value="">Localisation</option>
-
-                            {[...new Set(games.map(g => g.localisation))].map(loc => (
-                                <option key={loc} value={loc}>
-                                    {loc}
-                                </option>
-                            ))}
-                        </select>
+                            readOnly
+                        />
                     </div>
 
                     <div className="form-group">
@@ -210,19 +232,27 @@ function ReservationPage() {
                             required
                             value={formData.date}
                             onChange={handleChange}
+                            min={new Date().toISOString().split("T")[0]}
                         />
                     </div>
 
 
                     <div className="form-group">
                         <label>Heure</label>
-                        <input
-                            type="time"
+                        <select
                             id="time"
                             required
                             value={formData.time}
                             onChange={handleChange}
-                        />
+                        >
+                            <option value="">Choisir un horaire</option>
+
+                            {timeSlots.map(time => (
+                                <option key={time} value={time}>
+                                    {time}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
 
@@ -250,19 +280,19 @@ function ReservationPage() {
                         >
                             <option value="">Choisir une option</option>
 
-                            {Array.isArray(options) && options.length > 0 ? (
-                                options.map(opt => (
-                                    <option key={opt.id} value={opt.id}>
+                            {formData.mission && filteredOptions.length > 0 ? (
+                                filteredOptions.map(opt => (
+                                    <option key={opt.option_id} value={opt.option_id}>
                                         {opt.libelle} (+{opt.prix}€)
                                     </option>
                                 ))
                             ) : (
-                                <option disabled>Chargement...</option>
+                                <option disabled>Sélectionnez d'abord une mission</option>
                             )}
                         </select>
                     </div>
 
-                    <Button text="Réserver" variant="primary" type="submit"/>
+                    <Button text="Réserver" variant="primary" type="submit" />
 
                 </form>
             </div>
