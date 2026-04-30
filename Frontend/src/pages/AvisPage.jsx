@@ -26,6 +26,8 @@ function AvisPage() {
     if (token) {
         try {
             decoded = jwtDecode(token);
+            console.log(decoded.role);
+            
         } catch (error) {
             console.error('Token invalide:', error);
             localStorage.removeItem('token');
