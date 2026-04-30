@@ -125,6 +125,34 @@ function DashboardPage() {
         fetchPaiements();
     }, []);
 
+    const handleMakeAdmin = async () => {
+    const updatedUser = {
+        ...user,        // toutes les données existantes
+        role: "admin"
+    };
+
+    try {
+        await updateUser(user.user_id, updatedUser);
+        console.log("Utilisateur passé admin");
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const handleRemoveAdmin = async () => {
+    const updatedUser = {
+        ...user,
+        role: "client"
+    };
+
+    try {
+        await updateUser(user.user_id, updatedUser);
+        console.log("Droits retirés");
+    } catch (err) {
+        console.error(err);
+    }
+};
+
     return (
         <div className="page">
             <Navbar />
@@ -137,13 +165,16 @@ function DashboardPage() {
                         <ul>
                             {reservations.filter(r => r.estSupprime !== 1).map(reservation => (
                                 <li key={reservation.reservation_id}>
-                                    <p><strong>Id :</strong> {reservation.reservation_id}</p>
-                                    <p><strong>Utilisateur :</strong> {reservation.nom} {reservation.prenom} - <strong>Telephone :</strong> {reservation.telephone}</p>
-                                    <p><strong>Jeu :</strong> {reservation.titre}</p>
-                                    <p><strong>Localisation :</strong> {reservation.localisation}</p>
-                                    <p><strong>Créneau :</strong> {formatDateTime(reservation.creneau)}</p>
-                                    <p><strong>Date de réservation :</strong> {formatDateTime(reservation.date_reservation)}</p>
-                                    <p><strong>Statut</strong> {reservation.statut}</p>
+                                    <p>
+                                        <strong>Id :</strong> {reservation.reservation_id} •
+                                        <strong> Utilisateur :</strong> {reservation.nom} {reservation.prenom} •
+                                        <strong> Téléphone :</strong> {reservation.telephone} •
+                                        <strong> Jeu :</strong> {reservation.titre} •
+                                        <strong> Localisation :</strong> {reservation.localisation} •
+                                        <strong> Créneau :</strong> {formatDateTime(reservation.creneau)} •
+                                        <strong> Réservation :</strong> {formatDateTime(reservation.date_reservation)} •
+                                        <strong> Statut :</strong> {reservation.statut}
+                                    </p>
                                     <button onClick={() => handleDeleteReservation(reservation.reservation_id)} className="delete-button">Supprimer</button>
                                 </li>
                             ))}
@@ -159,7 +190,7 @@ function DashboardPage() {
                         <ul>
                             {users.filter(user => user.estSupprime !== 1).map(users => (
                                 <li key={users.user_id}>
-                                    <p>{users.prenom + ' ' + users.nom}</p>
+                                    <h5>{users.prenom + ' ' + users.nom}</h5>
                                     <p>Rôle : {users.role}</p>
                                     <button onClick={() => handleDeleteUser(users.user_id)} className="delete-button">Supprimer</button>
                                     {users.role != "admin"? (
