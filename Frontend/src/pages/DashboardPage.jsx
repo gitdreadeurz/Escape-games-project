@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { getAllReservations, getAllUsers, sofDelUser, deleteReservation, getAllPayments, deletePayment } from "../../service";
+import { getAllReservations, getAllUsers, sofDelUser, deleteReservation, getAllPayments, deletePayment, updateUser } from "../../service";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import '../styles/Dashboard.css';
@@ -101,6 +101,34 @@ function DashboardPage() {
         fetchPaiements();
     }, []);
 
+    const handleMakeAdmin = async () => {
+    const updatedUser = {
+        ...user,        // toutes les données existantes
+        role: "admin"
+    };
+
+    try {
+        await updateUser(user.user_id, updatedUser);
+        console.log("Utilisateur passé admin");
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const handleRemoveAdmin = async () => {
+    const updatedUser = {
+        ...user,
+        role: "client"
+    };
+
+    try {
+        await updateUser(user.user_id, updatedUser);
+        console.log("Droits retirés");
+    } catch (err) {
+        console.error(err);
+    }
+};
+
     return (
         <div className="page">
             <Navbar />
@@ -138,7 +166,10 @@ function DashboardPage() {
                                     <p>{users.prenom + ' ' + users.nom}</p>
                                     <p>Rôle : {users.role}</p>
                                     <button onClick={() => handleDeleteUser(users.user_id)} className="delete-button">Supprimer</button>
-                                    <button className="edit-button">Passer Admin</button>
+                                   {users.role != "admin"? (
+                                    <button onClick={()=> handleMakeAdmin} className="edit-button">Passer Admin</button>
+                                    
+                                   ) : (<button onClick={()=> handleRemoveAdmin}  className="edit-button">Retirer les droits</button>)}
                                 </li>
                             ))}
                         </ul>

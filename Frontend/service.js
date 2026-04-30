@@ -25,8 +25,8 @@ export function getUserById(id) {
     return client.get(`/user/${id}`)
 }
 
-export function updateUser(id) {
-    return client.put(`/user/${id}`)
+export function updateUser(id, userData) {
+    return client.put(`/user/${id}`, userData);
 }
 
 export function sofDelUser(id) {
