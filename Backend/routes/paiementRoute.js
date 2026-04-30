@@ -8,18 +8,18 @@ import express from "express";
 const router = express.Router();
 
 // Tous les paiements
-router.get("/", adminMiddleware, authMiddleware, allPayments);
+router.get("/", authMiddleware, adminMiddleware, allPayments);
 
 // Paiement par id
-router.get("/:paiement_id", adminMiddleware, authMiddleware, getPayment);
+router.get("/:paiement_id", authMiddleware, adminMiddleware, getPayment);
 
 // Ajouter nouveau paiement
 router.post("/", authMiddleware, createPayment);
 
 // Update un paiement
-router.put("/:paiement_id", adminMiddleware, authMiddleware, editPayment);
+router.put("/:paiement_id", authMiddleware, adminMiddleware, editPayment);
 
 // Supprimer un paiement
-router.delete("/:paiement_id", superAdminMiddleware, authMiddleware, removePayment);
+router.delete("/:paiement_id", authMiddleware, superAdminMiddleware, removePayment);
 
 export default router;
