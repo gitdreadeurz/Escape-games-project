@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { getAllReservations, getAllUsers, sofDelUser, deleteReservation, getAllPayments, deletePayment } from "../../service";
+import { getAllReservations, getAllUsers, sofDelUser, deleteReservation, getAllPayments, deletePayment, updateUser } from "../../service";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import '../styles/Dashboard.css';
@@ -71,6 +71,30 @@ function DashboardPage() {
         }
     };
 
+    const handlePromoteToAdmin = async (userId) => {
+        if (window.confirm('Passer cet utilisateur en admin ?')) {
+            try {
+                await updateUser(userId, 'admin');
+                console.log(`${userId} est maintenant admin`);
+                setUsers(users.map(u => u.user_id === userId ? { ...u, role: 'admin' } : u));
+            } catch (error) {
+                console.error("Erreur lors du changement de rôle :", error);
+            }
+        }
+    };
+
+    const handleDecadeToClient = async (userId) => {
+        if (window.confirm('Passer cet utilisateur en client ?')) {
+            try {
+                await updateUser(userId, 'client');
+                console.log(`${userId} est maintenant client`);
+                setUsers(users.map(u => u.user_id === userId ? { ...u, role: 'client' } : u));
+            } catch (error) {
+                console.error("Erreur lors du changement de rôle :", error);
+            }
+        }
+    };
+
     const handleDeleteReservation = async (reservationId) => {
         if (window.confirm('Supprimer cette réservation ?')) {
             try {
@@ -138,7 +162,10 @@ function DashboardPage() {
                                     <p>{users.prenom + ' ' + users.nom}</p>
                                     <p>Rôle : {users.role}</p>
                                     <button onClick={() => handleDeleteUser(users.user_id)} className="delete-button">Supprimer</button>
-                                    <button className="edit-button">Passer Admin</button>
+                                    {users.role != "admin"? (
+                                    <button onClick={()=> handlePromoteToAdmin(users.user_id)} className="edit-button">Passer Admin</button>
+                                    
+                                   ) : (<button onClick={()=> handleDecadeToClient(users.user_id)}  className="edit-button">Retirer les droits</button>)}
                                 </li>
                             ))}
                         </ul>
