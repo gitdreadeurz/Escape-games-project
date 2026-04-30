@@ -75,7 +75,7 @@ export function updateReservation(id){
 }
 
 export function deleteReservation(id){
-    return client.delete(`/reservation/${id}`)
+    return client.delete(`/reservation/${id}`, { data: { estSupprime: 1 } })
 }
 
 

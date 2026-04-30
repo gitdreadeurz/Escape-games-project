@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { getAllReservations, getAllUsers, sofDelUser } from "../../service";
+import { getAllReservations, getAllUsers, sofDelUser, deleteReservation } from "../../service";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 
@@ -49,6 +49,18 @@ function DashboardPage() {
         }
     };
 
+    const handleDeleteReservation = async (reservationId) => {
+        if (window.confirm('Supprimer cette réservation ?')) {
+            try {
+                await deleteReservation(reservationId);
+                console.log(`${reservationId} a été supprimé`);
+                setReservations(reservations.filter(r => r.reservation_id !== reservationId));
+            } catch (error) {
+                console.error("Erreur lors de la suppression de la réservation :", error);
+            }
+        }
+    };
+
     useEffect(() => {
         fetchReservations();
         fetchUsers();
@@ -64,10 +76,11 @@ function DashboardPage() {
                     <h2>Vos réservations</h2>
                     {reservations.length > 0 ? (
                         <ul>
-                            {reservations.map(reservation => (
-                                <li key={reservation.id}>
+                            {reservations.filter(r => r.estSupprime !== 1).map(reservation => (
+                                <li key={reservation.reservation_id}>
                                     <p>Jeu : {reservation.titre}</p>
                                     <p>Date de réservation : {reservation.date_reservation}</p>
+                                    <button onClick={() => handleDeleteReservation(reservation.reservation_id)} className="delete-button">Supprimer</button>
                                 </li>
                             ))}
                         </ul>
