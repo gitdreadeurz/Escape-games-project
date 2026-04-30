@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar';
 import MissionCard from '../components/MissionCard';
+import Footer from '../components/Footer';
 import { missions } from '../data/missions';
 import { getAllGames, deleteGame } from '../../service';
 import { useEffect, useState } from 'react';
@@ -95,6 +96,8 @@ function MissionsPage() {
                     </div>
                 </section>
             </main>
+            <Footer />
+
         </div>
     );
 }

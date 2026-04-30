@@ -13,12 +13,12 @@ router.get("/", listGames);
 router.get("/:game_id", getGame);
 
 // Ajouter un nouvel escape game
-router.post("/", adminMiddleware, authMiddleware, createGame);
+router.post("/", authMiddleware, adminMiddleware, createGame);
 
 // Update un escape game
-router.put ("/:game_id", adminMiddleware, authMiddleware, editGame);
+router.put ("/:game_id", authMiddleware, adminMiddleware, editGame);
 
 // Supprimer un escape game
-router.delete("/:game_id", adminMiddleware, authMiddleware, removeGame);
+router.delete("/:game_id", authMiddleware, adminMiddleware, removeGame);
 
 export default router;

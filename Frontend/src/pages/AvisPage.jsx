@@ -9,18 +9,27 @@ import { getAllAvis, getAllGames, addAvis } from '../../service';
 import { jwtDecode } from 'jwt-decode';
 
 function AvisPage() {
-  const navigate = useNavigate();
-  const token = localStorage.getItem('token');
 
-  let decoded = null;
-  if (token) {
-    try {
-      decoded = jwtDecode(token);
-    } catch (error) {
-      console.error('Token invalide:', error);
-      localStorage.removeItem('token');
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
+
+    const navigate = useNavigate();
+    const token = localStorage.getItem('token');
+
+
+    // Décoder le token s'il existe
+    let decoded = null;
+    if (token) {
+        try {
+            decoded = jwtDecode(token);
+            console.log(decoded.role);
+            
+        } catch (error) {
+            console.error('Token invalide:', error);
+            localStorage.removeItem('token');
+        }
     }
-  }
 
   const [avis, setAvis] = useState([]);
   const [page, setPage] = useState(1);
@@ -38,20 +47,30 @@ function AvisPage() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  
+    
+}, [])
+
 
   useEffect(() => {
     setIsLoged(!!localStorage.getItem('token'));
   }, []);
 
-  const fetchAvis = async () => {
-    try {
-      const response = await getAllAvis(page);
-      setAvis(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const fetchAvis = async () => {
+
+        try {
+            const response = await getAllAvis(page);
+            console.log(response);
+            setAvis(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleChangePage = (_event, value) => {
+        setPage(value);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
   const fetchGames = async () => {
     try {
@@ -62,15 +81,13 @@ function AvisPage() {
     }
   };
 
-  useEffect(() => {
+useEffect(() => {
     fetchAvis();
     fetchGames();
-  }, []);
 
-  const handleChangePage = (_event, value) => {
-    setPage(value);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+}, []);
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
