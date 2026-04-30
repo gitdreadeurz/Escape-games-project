@@ -1,19 +1,33 @@
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.webp";
 import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 function Navbar() {
   const navigate = useNavigate();
 
-  const [isLoged, setIsLoged] = useState(false);
+
+  const [isLogged, setIsLogged] = useState(false);
+  const [role, setRole] = useState('');
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setIsLoged(true);
-    } else {
-      setIsLoged(false);
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decoded = jwtDecode(token);
+      const role = decoded.role;
+      console.log(role);
+
+      if (role === 'client' || role === 'admin' || role === 'superadmin') {
+        setIsLogged(true);
+        setRole(role);
+      }
+      else {
+        setIsLogged(false);
+        setRole('');
+      }
     }
   }, []);
+
 
   return (
     <header className="navbar">
@@ -21,7 +35,6 @@ function Navbar() {
         <img src={logo} alt="Escape Room" className="logo" />
         <span>Escape Room</span>
       </div>
-
 
       <nav className="nav-links">
         <button onClick={() => {
@@ -37,10 +50,14 @@ function Navbar() {
           navigate('/avis')
         }}>Les avis</button>
 
+        {isLogged && (role === 'admin' || role === 'superadmin') ? <button onClick={() => {
+          navigate('/dashboard')
+        }}>DashBoard</button> : null}
 
-        {isLoged ? <button style={{ backgroundColor: 'red' , color :"white " }} onClick={() => {
+
+        {isLogged ? <button style={{ backgroundColor: 'red', color: "white " }} onClick={() => {
           localStorage.removeItem('token');
-          setIsLoged(false);
+          setIsLogged(false);
           navigate('/');
         }}>Déconnexion</button> : <button onClick={() => {
           navigate('/inscription')
