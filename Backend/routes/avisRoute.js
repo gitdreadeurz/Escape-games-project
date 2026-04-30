@@ -8,8 +8,8 @@ const router = express.Router();
 
 router.post('/', authMiddleware, newAvis);
 router.get('/', listAvis);
-router.get('/:id', adminMiddleware, authMiddleware, avisById);
-router.put('/:id', adminMiddleware, authMiddleware, updAvis);
-router.delete('/:id', adminMiddleware, authMiddleware, delAvis);
+router.get('/:id', authMiddleware, adminMiddleware, avisById);
+router.put('/:id', authMiddleware, adminMiddleware, updAvis);
+router.delete('/:id', authMiddleware, adminMiddleware, delAvis);
 
 export default router;
