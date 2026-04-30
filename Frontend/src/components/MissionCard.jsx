@@ -27,7 +27,7 @@ function MissionCard({ game, onDelete, userRole }) {
           <p><strong>Prix</strong><span>{game.prix} €</span></p>
         </div>
 
-        <Link to="/reservation" className="mission-button-link">
+        <Link to="/reservation" state={{ gameId: game.game_id }} className="mission-button-link">
           <Button text="Réserver" variant="secondary" />
                         {canDelete && (
                             <Button text="Supprimer" 
