@@ -23,6 +23,8 @@ Ce projet est une **application web complète** permettant la gestion d'escape g
 | **Avis** | Système de notation et commentaires |
 | **Planning** | Calendrier interactif des disponibilités |
 | **Administration** | Gestion complète via tableau de bord admin |
+| **Inscription** | Formulaire d'inscription utilisateur |
+| **Concept** | Page de présentation du concept |
 
 ### Rôles utilisateurs
 
@@ -45,6 +47,9 @@ Ce projet est une **application web complète** permettant la gestion d'escape g
 | bcryptjs | 3.x | Hashage mots de passe |
 | Swagger | 5.x | Documentation API |
 | cookie-parser | 1.4.x | Gestion des cookies |
+| cors | 2.8.x | Cross-origin resource sharing |
+| nodemon | 3.x | Mode développement |
+| dotenv | 17.x | Variables d'environnement |
 
 ### Frontend
 
@@ -52,7 +57,10 @@ Ce projet est une **application web complète** permettant la gestion d'escape g
 |-------------|---------|-------|
 | React | 19.x | Framework UI |
 | Vite | 8.x | Build tool |
-| JavaScript | ES6+ | Langage |
+| React Router | 7.x | Routing |
+| MUI (Material UI) | 9.x | Composants UI |
+| Axios | 1.x | Requêtes HTTP |
+| jwt-decode | 4.x | Décodage JWT |
 
 ---
 
@@ -101,8 +109,30 @@ Escape-games-project/
 │   ├── src/
 │   │   ├── App.jsx            # Composant principal
 │   │   ├── main.jsx           # Point d'entrée
-│   │   ├── App.css
-│   │   └── index.css
+│   │   ├── style.css          # Styles globaux
+│   │   ├── components/        # Composants réutilisables
+│   │   │   ├── Button.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Header.jsx
+│   │   │   ├── HomePage.jsx
+│   │   │   ├── MissionCard.jsx
+│   │   │   └── Navbar.jsx
+│   │   ├── pages/             # Pages de l'application
+│   │   │   ├── AvisPage.jsx
+│   │   │   ├── ConceptPage.jsx
+│   │   │   ├── DashboardPage.jsx
+│   │   │   ├── HomePage.jsx
+│   │   │   ├── InscriptionPage.jsx
+│   │   │   ├── MissionsPage.jsx
+│   │   │   ├── PaiementPage.jsx
+│   │   │   └── ReservationPage.jsx
+│   │   ├── styles/            # Fichiers CSS additionnels
+│   │   │   ├── Dashboard.css
+│   │   │   ├── global.css
+│   │   │   └── InscriptionPage.css
+│   │   ├── data/              # Données statiques
+│   │   │   └── missions.js
+│   │   └── assets/            # Ressources statiques
 │   ├── public/
 │   ├── package.json
 │   ├── vite.config.js
