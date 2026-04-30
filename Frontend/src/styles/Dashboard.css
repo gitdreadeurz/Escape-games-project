@@ -2,57 +2,63 @@
 
 /* ───── Variables ───── */
 :root {
-  --bg:      #0f1117;
+  --bg: #0f1117;
   --surface: #171923;
-  --card:    #1e2130;
-  --border:  #2a2f45;
-  --accent:  #f4a321;
-  --blue:    #4b94e8;
-  --red:     #e05252;
-  --text:    #e2e8f0;
-  --muted:   #7a8299;
-  --label:   #a0abc2;
-  --radius:  10px;
-  --font:    'DM Sans', sans-serif;
-  --mono:    'DM Mono', monospace;
+  --card: #1e2130;
+  --border: #2a2f45;
+  --accent: #f4a321;
+  --blue: #4b94e8;
+  --red: #e05252;
+  --text: #e2e8f0;
+  --muted: #7a8299;
+  --label: #a0abc2;
+  --radius: 12px;
+  --font: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
 }
 
 /* ───── Reset ───── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 /* ───── Page ───── */
 .dashboard-page {
   font-family: var(--font);
   background: var(--bg);
   min-height: 100vh;
-  padding: 56px 48px;
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 56px 48px;
 }
 
-/* ───── En-tête ───── */
+/* ───── Header ───── */
 .dashboard-page h1 {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--text);
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
 }
 
 .dashboard-page h1::after {
-  content: '';
+  content: "";
   display: block;
-  width: 36px;
+  width: 42px;
   height: 3px;
+  border-radius: 999px;
   background: var(--accent);
-  border-radius: 2px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .dashboard-page > p {
-  color: var(--muted);
   font-size: 14px;
-  margin-top: 6px;
-  margin-bottom: 48px;
+  color: var(--muted);
+  margin-top: 8px;
+  margin-bottom: 42px;
 }
 
 /* ───── Sections ───── */
@@ -61,209 +67,245 @@
 .paiements-list {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 32px;
-  margin-bottom: 32px;
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 28px;
 }
 
-/* ───── Titres h2 ───── */
+/* ───── Titles ───── */
 .reservations-list h2,
 .users-list h2,
 .paiements-list h2 {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.2px;
   color: var(--accent);
-  margin-bottom: 20px;
   padding-bottom: 14px;
+  margin-bottom: 22px;
   border-bottom: 1px solid var(--border);
 }
 
-/* ───── Listes ───── */
+/* ───── Lists ───── */
 .reservations-list ul,
 .users-list ul,
 .paiements-list ul {
   list-style: none;
   display: grid;
-  gap: 10px;
+  gap: 14px;
 }
 
-/* Réservations & utilisateurs : 2 colonnes */
 .reservations-list ul,
 .users-list ul {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 }
 
-/* Paiements : 2 colonnes légèrement plus larges */
 .paiements-list ul {
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
 }
 
-/* ───── Cartes communes ───── */
+/* ───── Cards globales ───── */
 .reservations-list li,
 .users-list li,
 .paiements-list li {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px 20px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  padding: 18px 20px;
+  transition: 0.2s ease;
 }
 
 .reservations-list li:hover,
 .users-list li:hover,
 .paiements-list li:hover {
   border-color: var(--blue);
-  box-shadow: 0 0 0 1px rgba(75, 148, 232, 0.15);
+  box-shadow: 0 0 0 1px rgba(75, 148, 232, 0.18);
+  transform: translateY(-2px);
 }
 
-/* ───── Cartes réservations : texte à gauche, bouton à droite ───── */
+/* ───── Réservations ───── */
 .reservations-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  display: grid;
+  gap: 8px;
 }
 
 .reservations-list li p {
-  font-size: 14px;
   color: var(--text);
-  line-height: 1.6;
-  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-/* ───── Cartes utilisateurs : grille texte | boutons empilés ───── */
+.reservations-list .delete-button {
+  justify-self: end;
+  margin-top: 10px;
+}
+
+/* ───── Utilisateurs (corrigé) ───── */
+.users-list ul {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+}
+
 .users-list li {
   display: grid;
   grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto;
+  grid-template-areas:
+    "name name"
+    "role role"
+    "delete edit";
+  gap: 10px 12px;
   align-items: center;
-  gap: 4px 16px;
 }
 
-.users-list li > p:nth-child(1) { grid-column: 1; grid-row: 1; }
-.users-list li > p:nth-child(2) { grid-column: 1; grid-row: 2; }
-.users-list li > .delete-button { grid-column: 2; grid-row: 1; }
-.users-list li > .edit-button   { grid-column: 2; grid-row: 2; }
-
-.users-list li p {
-  font-size: 14px;
+.users-list h5 {
+  grid-area: name;
   color: var(--text);
-  line-height: 1.6;
+  font-size: 16px;
+  font-weight: 600;
 }
 
-/* ───── Cartes paiements : colonne ───── */
+.users-list p {
+  grid-area: role;
+  color: var(--label);
+  font-size: 14px;
+}
+
+.users-list .delete-button {
+  grid-area: delete;
+  width: 100%;
+}
+
+.users-list .edit-button {
+  grid-area: edit;
+  width: 100%;
+}
+
+/* ───── Paiements ───── */
 .paiements-list li {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 6px;
 }
 
-.paiements-list li h4 {
+.paiements-list h4 {
+  color: var(--text);
   font-size: 15px;
   font-weight: 600;
-  color: var(--text);
 }
 
-.paiements-list li h5 {
-  font-size: 13px;
-  font-weight: 500;
+.paiements-list h5 {
   color: var(--blue);
-  margin-bottom: 4px;
-}
-
-.paiements-list li p {
   font-size: 13px;
-  color: var(--label);
-  font-family: var(--mono);
-  line-height: 1.6;
+  font-weight: 600;
 }
 
-/* ───── Boutons ───── */
+.paiements-list p {
+  color: var(--label);
+  font-size: 13px;
+  font-family: var(--mono);
+  line-height: 1.5;
+}
+
+.paiements-list .delete-button {
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+/* ───── Buttons ───── */
 .delete-button,
 .edit-button {
   font-family: var(--font);
   font-size: 12px;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 6px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
   border: 1px solid;
+  background: transparent;
   cursor: pointer;
+  transition: 0.2s ease;
   white-space: nowrap;
-  width: fit-content;
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
 }
 
 .delete-button {
   color: var(--red);
   border-color: var(--red);
-  background: transparent;
 }
 
 .delete-button:hover {
   background: var(--red);
-  color: #fff;
+  color: white;
   box-shadow: 0 0 12px rgba(224, 82, 82, 0.3);
 }
 
 .edit-button {
   color: var(--blue);
   border-color: var(--blue);
-  background: transparent;
 }
 
 .edit-button:hover {
   background: var(--blue);
-  color: #fff;
+  color: white;
   box-shadow: 0 0 12px rgba(75, 148, 232, 0.3);
 }
 
-/* ───── Message vide ───── */
+/* ───── Empty states ───── */
 .reservations-list > p,
 .users-list > p,
 .paiements-list > p {
+  text-align: center;
   color: var(--muted);
   font-size: 14px;
   font-style: italic;
-  text-align: center;
   padding: 24px 0;
 }
 
-/* ───── Responsive ───── */
+/* ───── Responsive tablette ───── */
 @media (max-width: 900px) {
-  .dashboard-page { padding: 40px 24px; }
+  .dashboard-page {
+    padding: 40px 24px;
+  }
 
   .reservations-list ul,
   .users-list ul,
-  .paiements-list ul { grid-template-columns: 1fr; }
+  .paiements-list ul {
+    grid-template-columns: 1fr;
+  }
 }
 
+/* ───── Responsive mobile ───── */
 @media (max-width: 600px) {
-  .dashboard-page { padding: 28px 16px; }
-  .dashboard-page h1 { font-size: 22px; }
+  .dashboard-page {
+    padding: 28px 16px;
+  }
+
+  .dashboard-page h1 {
+    font-size: 24px;
+  }
 
   .reservations-list,
   .users-list,
-  .paiements-list { padding: 20px 16px; margin-bottom: 20px; }
-
-  .reservations-list li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+  .paiements-list {
+    padding: 20px 16px;
+    margin-bottom: 20px;
   }
 
   .users-list li {
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
+    grid-template-areas:
+      "name"
+      "role"
+      "delete"
+      "edit";
   }
 
-  .users-list li > p:nth-child(1) { grid-column: 1; grid-row: 1; }
-  .users-list li > p:nth-child(2) { grid-column: 1; grid-row: 2; }
-  .users-list li > .delete-button { grid-column: 1; grid-row: 3; }
-  .users-list li > .edit-button   { grid-column: 1; grid-row: 4; }
-
   .delete-button,
-  .edit-button { width: 100%; text-align: center; }
+  .edit-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .reservations-list .delete-button,
+  .paiements-list .delete-button {
+    justify-self: stretch;
+    align-self: stretch;
+  }
 }

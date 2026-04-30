@@ -166,7 +166,8 @@ const handleRemoveAdmin = async () => {
                             {reservations.filter(r => r.estSupprime !== 1).map(reservation => (
                                 <li key={reservation.reservation_id}>
                                     <p><strong>Id :</strong> {reservation.reservation_id}</p>
-                                    <p><strong>Utilisateur :</strong> {reservation.nom} {reservation.prenom} - <strong>Telephone :</strong> {reservation.telephone}</p>
+                                    <p><strong>Utilisateur :</strong> {reservation.nom} {reservation.prenom}</p>
+                                    <p><strong>Telephone :</strong> {reservation.telephone}</p>
                                     <p><strong>Jeu :</strong> {reservation.titre}</p>
                                     <p><strong>Localisation :</strong> {reservation.localisation}</p>
                                     <p><strong>Créneau :</strong> {formatDateTime(reservation.creneau)}</p>
