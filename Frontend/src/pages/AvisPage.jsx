@@ -167,7 +167,7 @@ useEffect(() => {
           <section className="avis-form-section">
             <h2>Laisser un avis</h2>
 
-            <form onSubmit={handleSubmit} className="avis-form">
+            <form onSubmit={handleSubmit} className="reservation-form">
               <div className="form-group">
                 <label htmlFor="name">Nom</label>
                 <input
