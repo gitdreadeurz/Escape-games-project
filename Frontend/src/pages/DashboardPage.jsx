@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { getAllReservations, getAllUsers,getAllPayments, sofDelUser, deleteReservation } from "../../service";
+import { getAllReservations, getAllUsers, getAllPayments, sofDelUser, deleteReservation } from "../../service";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import '../styles/Dashboard.css';
@@ -91,7 +91,8 @@ function DashboardPage() {
                             {reservations.filter(r => r.estSupprime !== 1).map(reservation => (
                                 <li key={reservation.reservation_id}>
                                     <p>Jeu : {reservation.titre}</p>
-                                    <p>Date de réservation : {reservation.date_reservation}</p>
+                                    <p>Date de réservation :{" "}
+                                        {new Date(reservation.date_reservation).toLocaleDateString("fr-FR")}</p>
                                     <button onClick={() => handleDeleteReservation(reservation.reservation_id)} className="delete-button">Supprimer</button>
                                 </li>
                             ))}
@@ -107,7 +108,7 @@ function DashboardPage() {
                         <ul>
                             {users.filter(user => user.estSupprime !== 1).map(users => (
                                 <li key={users.user_id}>
-                                    <p>{users.prenom + ' ' + users.nom}</p>
+                                    <h5>{users.prenom + ' ' + users.nom}</h5>
                                     <p>Rôle : {users.role}</p>
                                     <button onClick={() => handleDeleteUser(users.user_id)} className="delete-button">Supprimer</button>
                                     <button className="edit-button">Passer Admin</button>
