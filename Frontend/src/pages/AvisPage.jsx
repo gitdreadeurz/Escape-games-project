@@ -225,6 +225,7 @@ useEffect(() => {
                   rows="4"
                   value={newReview.commentaire}
                   required
+                  style={{ resize: 'none' }}
                   onChange={(e) =>
                     setNewReview({ ...newReview, commentaire: e.target.value })
                   }

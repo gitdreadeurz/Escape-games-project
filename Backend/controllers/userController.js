@@ -71,7 +71,7 @@ export async function updUser(req, res) {
 export async function softDelUser(req, res) {
     try {
         const { id } = req.params;
-        const estSupprime = req.body.estSupprime;
+        const estSupprime = 1;
         const user = await softDeleteUser(id, estSupprime);
         res.status(200).json(user);
     } catch (error) {

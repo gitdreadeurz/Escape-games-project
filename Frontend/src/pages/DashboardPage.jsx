@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import { getAllReservations, getAllUsers } from "../../service";
+import { getAllReservations, getAllUsers, sofDelUser } from "../../service";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 
@@ -37,6 +37,17 @@ function DashboardPage() {
         }
     };
 
+    const handleDeleteUser = async (userId) => {
+        try {
+            await sofDelUser(userId);
+            console.log(`${userId} a été supprimé`);
+            
+           
+        } catch (error) {
+            console.error("Erreur lors de la suppression de l'utilisateur :", error);
+        }
+    };
+
     useEffect(() => {
         fetchReservations();
         fetchUsers();
@@ -68,10 +79,12 @@ function DashboardPage() {
                     <h2>Liste des utilisateurs</h2>
                     {users.length > 0 ? (
                         <ul>
-                            {users.map(users => (
+                            {users.filter(user => user.estSupprime !== 1).map(users => (
                                 <li key={users.user_id}>
                                     <p>{users.prenom+' '+users.nom}</p>
                                     <p>Rôle : {users.role}</p>
+                                    <button onClick={handleDeleteUser} className="delete-button">Supprimer</button>
+                                    <button className="edit-button">Passer Admin</button>
                                 </li>
                             ))}
                         </ul>
