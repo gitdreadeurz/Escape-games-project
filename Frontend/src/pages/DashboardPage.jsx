@@ -165,16 +165,14 @@ const handleRemoveAdmin = async () => {
                         <ul>
                             {reservations.filter(r => r.estSupprime !== 1).map(reservation => (
                                 <li key={reservation.reservation_id}>
-                                    <p>
-                                        <strong>Id :</strong> {reservation.reservation_id} •
-                                        <strong> Utilisateur :</strong> {reservation.nom} {reservation.prenom} •
-                                        <strong> Téléphone :</strong> {reservation.telephone} •
-                                        <strong> Jeu :</strong> {reservation.titre} •
-                                        <strong> Localisation :</strong> {reservation.localisation} •
-                                        <strong> Créneau :</strong> {formatDateTime(reservation.creneau)} •
-                                        <strong> Réservation :</strong> {formatDateTime(reservation.date_reservation)} •
-                                        <strong> Statut :</strong> {reservation.statut}
-                                    </p>
+                                    <p><strong>Id :</strong> {reservation.reservation_id}</p>
+                                    <p><strong>Utilisateur :</strong> {reservation.nom} {reservation.prenom}</p>
+                                    <p><strong>Telephone :</strong> {reservation.telephone}</p>
+                                    <p><strong>Jeu :</strong> {reservation.titre}</p>
+                                    <p><strong>Localisation :</strong> {reservation.localisation}</p>
+                                    <p><strong>Créneau :</strong> {formatDateTime(reservation.creneau)}</p>
+                                    <p><strong>Date de réservation :</strong> {formatDateTime(reservation.date_reservation)}</p>
+                                    <p><strong>Statut</strong> {reservation.statut}</p>
                                     <button onClick={() => handleDeleteReservation(reservation.reservation_id)} className="delete-button">Supprimer</button>
                                 </li>
                             ))}
