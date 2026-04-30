@@ -299,7 +299,59 @@ function ReservationPage() {
 
             <Footer />
         </div>
-    );
+
+        <div className="form-group">
+          <label>Localisation</label>
+          <input
+            type="text"
+            id="localisation"
+            value={formData.localisation}
+            disabled
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Date</label>
+          <input type="date" id="date" required value={formData.date} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Heure</label>
+          <input type="time" id="time" required value={formData.time} onChange={handleChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Nombre de joueurs</label>
+          <input
+            type="number"
+            id="players"
+            min="2"
+            max="8"
+            required
+            value={formData.players}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Options</label>
+          <select id="option" value={formData.option} onChange={handleChange}>
+            <option value="">Choisir une option</option>
+            {options.map(opt => (
+              <option key={opt.id} value={opt.id}>
+                {opt.libelle} (+{opt.prix}€)
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <Button text="Réserver" variant="primary" type="submit" />
+      </form>
+    </main>
+
+    <Footer />
+  </div>
+);
 }
 
 export default ReservationPage;
