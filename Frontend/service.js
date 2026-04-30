@@ -98,8 +98,9 @@ export function updateGame(id){
 }
 
 export function deleteGame(id){
-    return client.delete(`/game/${id}`)
+    return client.delete(`/game/${id}`, { data: { estSupprime: 1 } })
 }
+
 
 // Fonctions pour les paiements
 

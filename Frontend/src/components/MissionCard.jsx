@@ -29,12 +29,13 @@ function MissionCard({ game, onDelete, userRole }) {
 
         <Link to="/reservation" state={{ gameId: game.game_id }} className="mission-button-link">
           <Button text="Réserver" variant="secondary" />
-                        {canDelete && (
-                            <Button text="Supprimer" 
-                                    variant="danger" 
-                                    onClick={() => onDelete(game.id)} />
-                        )}
         </Link>
+                        {canDelete && (
+                            <Button 
+                                    text="Supprimer" 
+                                    variant= "danger"
+                                    onClick={() => onDelete(game.game_id)} />
+                        )}
       </div>
     </article>
   );
