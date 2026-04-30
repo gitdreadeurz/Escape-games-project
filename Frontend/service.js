@@ -25,8 +25,8 @@ export function getUserById(id) {
     return client.get(`/user/${id}`)
 }
 
-export function updateUser(id) {
-    return client.put(`/user/${id}`)
+export function updateUser(id, role) {
+    return client.put(`/user/${id}`, { role })
 }
 
 export function sofDelUser(id) {
@@ -121,7 +121,7 @@ export function updatePayment(id){
 }
 
 export function deletePayment(id){
-    return client.delete(`/paiement/${id}`)
+    return client.delete(`/paiement/${id}`, { data: { estSupprime: 1 } })
 }
 
 // Fonctions pour les avis
