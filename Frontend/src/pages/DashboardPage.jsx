@@ -42,8 +42,8 @@ function DashboardPage() {
                         <ul>
                             {reservations.map(reservation => (
                                 <li key={reservation.id}>
-                                    <p>{reservation.game.name}</p>
-                                    <p>Date : {reservation.date}</p>
+                                    <p>Jeu : {reservation.titre}</p>
+                                    <p>Date de réservation : {reservation.date_reservation}</p>
                                 </li>
                             ))}
                         </ul>
