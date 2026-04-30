@@ -15,7 +15,7 @@ export async function newPayment(montant, mode_paiement, promo, statut, reservat
 
 // Tous les paiements
 export async function getPayments() {
-    const select = "SELECT paiement_id,montant, mode_paiement, promo, p.statut, p.reservation_id, p.estSupprime FROM paiement p INNER JOIN Reservation r ON p.reservation_id = r.reservation_id;";
+    const select = "SELECT eg.titre, paiement_id,montant, mode_paiement, promo, p.statut, p.reservation_id, p.estSupprime , u.nom, u.prenom FROM paiement p INNER JOIN Reservation r ON p.reservation_id = r.reservation_id INNER JOIN Utilisateur u ON r.user_id = u.user_id INNER JOIN Escape_Game eg ON r.game_id = eg.game_id;";
     const [result] = await connection.query(select);
     return result;
 }
