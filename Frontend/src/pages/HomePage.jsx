@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import MissionCard from '../components/MissionCard';
 import { Link } from 'react-router-dom';
 import heroImage from '../assets/hero.webp';
-import { getAllGames } from '../../service';
+import { getAllGames, deleteGame } from '../../service';
 import { useEffect, useState } from 'react';
 
 function HomePage() {
@@ -54,7 +54,10 @@ function HomePage() {
         <section className="missions-section">
           <div className="missions-grid">
             {missionsPreview.map((mission) => (
-              <MissionCard key={mission.id} game={mission} />
+              <MissionCard
+                key={mission.id}
+                game={mission}
+              />
             ))}
           </div>
 
