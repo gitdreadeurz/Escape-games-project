@@ -38,13 +38,14 @@ function DashboardPage() {
     };
 
     const handleDeleteUser = async (userId) => {
-        try {
-            await sofDelUser(userId);
-            console.log(`${userId} a été supprimé`);
-            
-           
-        } catch (error) {
-            console.error("Erreur lors de la suppression de l'utilisateur :", error);
+        if (window.confirm('Supprimer cet utilisateur ?')) {
+            try {
+                await sofDelUser(userId);
+                console.log(`${userId} a été supprimé`);
+                setUsers(users.filter(u => u.user_id !== userId));
+            } catch (error) {
+                console.error("Erreur lors de la suppression de l'utilisateur :", error);
+            }
         }
     };
 
@@ -83,7 +84,7 @@ function DashboardPage() {
                                 <li key={users.user_id}>
                                     <p>{users.prenom+' '+users.nom}</p>
                                     <p>Rôle : {users.role}</p>
-                                    <button onClick={handleDeleteUser} className="delete-button">Supprimer</button>
+                                    <button onClick={() => handleDeleteUser(users.user_id)} className="delete-button">Supprimer</button>
                                     <button className="edit-button">Passer Admin</button>
                                 </li>
                             ))}
