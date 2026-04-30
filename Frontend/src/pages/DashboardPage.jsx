@@ -187,7 +187,7 @@ const handleRemoveAdmin = async () => {
                         <ul>
                             {users.filter(user => user.estSupprime !== 1).map(users => (
                                 <li key={users.user_id}>
-                                    <p>{users.prenom + ' ' + users.nom}</p>
+                                    <h5>{users.prenom + ' ' + users.nom}</h5>
                                     <p>Rôle : {users.role}</p>
                                     <button onClick={() => handleDeleteUser(users.user_id)} className="delete-button">Supprimer</button>
                                     {users.role != "admin"? (

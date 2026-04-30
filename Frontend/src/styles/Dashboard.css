@@ -1,143 +1,269 @@
-/* Container principal */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+/* ───── Variables ───── */
+:root {
+  --bg:      #0f1117;
+  --surface: #171923;
+  --card:    #1e2130;
+  --border:  #2a2f45;
+  --accent:  #f4a321;
+  --blue:    #4b94e8;
+  --red:     #e05252;
+  --text:    #e2e8f0;
+  --muted:   #7a8299;
+  --label:   #a0abc2;
+  --radius:  10px;
+  --font:    'DM Sans', sans-serif;
+  --mono:    'DM Mono', monospace;
+}
+
+/* ───── Reset ───── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ───── Page ───── */
 .dashboard-page {
-  background: #1f2033;
-  padding: 60px 40px;
-  max-width: 1200px;
-  margin: 0 auto;
+  font-family: var(--font);
+  background: var(--bg);
   min-height: 100vh;
+  padding: 56px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-/* Titre principal */
+/* ───── En-tête ───── */
 .dashboard-page h1 {
-  color: #f4a321;
-  font-size: 28px;
-  margin: 0 0 8px;
+  font-size: 26px;
   font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
 }
 
-/* Paragraphe d'intro */
+.dashboard-page h1::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-top: 8px;
+}
+
 .dashboard-page > p {
-  color: #ccc;
+  color: var(--muted);
   font-size: 14px;
-  margin: 0 0 40px;
-  line-height: 1.5;
+  margin-top: 6px;
+  margin-bottom: 48px;
 }
 
-/* Sections (réservations, utilisateurs, paiements) */
+/* ───── Sections ───── */
 .reservations-list,
 .users-list,
 .paiements-list {
-  background: #2b2b3b;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  margin-bottom: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  margin-bottom: 32px;
 }
 
-/* Titres h2 */
+/* ───── Titres h2 ───── */
 .reservations-list h2,
 .users-list h2,
 .paiements-list h2 {
-  color: #f4a321;
-  font-size: 20px;
-  margin: 0 0 20px;
-  font-weight: 700;
-  border-bottom: 2px solid #4b94e8;
-  padding-bottom: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--accent);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
 }
 
-/* Listes */
+/* ───── Listes ───── */
 .reservations-list ul,
 .users-list ul,
 .paiements-list ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  gap: 10px;
 }
 
-/* Items de liste */
+/* Réservations & utilisateurs : 2 colonnes */
+.reservations-list ul,
+.users-list ul {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* Paiements : 2 colonnes légèrement plus larges */
+.paiements-list ul {
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+}
+
+/* ───── Cartes communes ───── */
 .reservations-list li,
 .users-list li,
 .paiements-list li {
-  background: #1f2033;
-  border: 2px solid #4b94e8;
-  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: 16px 20px;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .reservations-list li:hover,
 .users-list li:hover,
 .paiements-list li:hover {
-  border-color: #f4a321;
-  box-shadow: 0 0 12px rgba(244, 163, 33, 0.2);
-  transform: translateY(-2px);
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px rgba(75, 148, 232, 0.15);
 }
 
-/* Paragraphes dans les items */
-.reservations-list li p,
-.users-list li p,
-.paiements-list li p {
-  color: #ccc;
+/* ───── Cartes réservations : texte à gauche, bouton à droite ───── */
+.reservations-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.reservations-list li p {
   font-size: 14px;
-  margin: 0 0 6px;
-  line-height: 1.5;
+  color: var(--text);
+  line-height: 1.6;
+  flex: 1;
 }
 
-.reservations-list li p:last-child,
-.users-list li p:last-child,
-.paiements-list li p:last-child {
-  margin-bottom: 0;
+/* ───── Cartes utilisateurs : grille texte | boutons empilés ───── */
+.users-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 4px 16px;
 }
 
-/* Message vide */
+.users-list li > p:nth-child(1) { grid-column: 1; grid-row: 1; }
+.users-list li > p:nth-child(2) { grid-column: 1; grid-row: 2; }
+.users-list li > .delete-button { grid-column: 2; grid-row: 1; }
+.users-list li > .edit-button   { grid-column: 2; grid-row: 2; }
+
+.users-list li p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ───── Cartes paiements : colonne ───── */
+.paiements-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.paiements-list li h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.paiements-list li h5 {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+
+.paiements-list li p {
+  font-size: 13px;
+  color: var(--label);
+  font-family: var(--mono);
+  line-height: 1.6;
+}
+
+/* ───── Boutons ───── */
+.delete-button,
+.edit-button {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid;
+  cursor: pointer;
+  white-space: nowrap;
+  width: fit-content;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+}
+
+.delete-button {
+  color: var(--red);
+  border-color: var(--red);
+  background: transparent;
+}
+
+.delete-button:hover {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(224, 82, 82, 0.3);
+}
+
+.edit-button {
+  color: var(--blue);
+  border-color: var(--blue);
+  background: transparent;
+}
+
+.edit-button:hover {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(75, 148, 232, 0.3);
+}
+
+/* ───── Message vide ───── */
 .reservations-list > p,
 .users-list > p,
 .paiements-list > p {
-  color: #ccc;
+  color: var(--muted);
   font-size: 14px;
   font-style: italic;
+  text-align: center;
+  padding: 24px 0;
 }
 
-/* Responsive */
+/* ───── Responsive ───── */
 @media (max-width: 900px) {
-  .dashboard-page {
-    padding: 40px 20px;
-  }
+  .dashboard-page { padding: 40px 24px; }
 
-  .dashboard-page h1 {
-    font-size: 24px;
-  }
-
-  .reservations-list,
-  .users-list,
-  .paiements-list {
-    padding: 30px;
-  }
+  .reservations-list ul,
+  .users-list ul,
+  .paiements-list ul { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
-  .dashboard-page {
-    padding: 30px 15px;
-  }
-
-  .dashboard-page h1 {
-    font-size: 20px;
-  }
+  .dashboard-page { padding: 28px 16px; }
+  .dashboard-page h1 { font-size: 22px; }
 
   .reservations-list,
   .users-list,
-  .paiements-list {
-    padding: 20px;
-    margin-bottom: 24px;
+  .paiements-list { padding: 20px 16px; margin-bottom: 20px; }
+
+  .reservations-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 
-  .reservations-list h2,
-  .users-list h2,
-  .paiements-list h2 {
-    font-size: 17px;
+  .users-list li {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
+
+  .users-list li > p:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .users-list li > p:nth-child(2) { grid-column: 1; grid-row: 2; }
+  .users-list li > .delete-button { grid-column: 1; grid-row: 3; }
+  .users-list li > .edit-button   { grid-column: 1; grid-row: 4; }
+
+  .delete-button,
+  .edit-button { width: 100%; text-align: center; }
 }
