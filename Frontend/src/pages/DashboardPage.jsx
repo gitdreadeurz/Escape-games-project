@@ -125,6 +125,34 @@ function DashboardPage() {
         fetchPaiements();
     }, []);
 
+    const handleMakeAdmin = async () => {
+    const updatedUser = {
+        ...user,        // toutes les données existantes
+        role: "admin"
+    };
+
+    try {
+        await updateUser(user.user_id, updatedUser);
+        console.log("Utilisateur passé admin");
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const handleRemoveAdmin = async () => {
+    const updatedUser = {
+        ...user,
+        role: "client"
+    };
+
+    try {
+        await updateUser(user.user_id, updatedUser);
+        console.log("Droits retirés");
+    } catch (err) {
+        console.error(err);
+    }
+};
+
     return (
         <div className="page">
             <Navbar />
