@@ -6,6 +6,7 @@ import ReservationPage from './pages/ReservationPage';
 import PaiementPage from './pages/PaiementPage';
 import AvisPage from './pages/AvisPage';
 import InscriptionPage from './pages/InscriptionPage';
+import DashboardPage from './pages/DashboardPage';
 import './styles/global.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/paiement" element={<PaiementPage />} />
         <Route path="/avis" element={<AvisPage />} />
         <Route path="/inscription" element={<InscriptionPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </Router>
   );
