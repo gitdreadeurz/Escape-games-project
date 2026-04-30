@@ -8,6 +8,17 @@ function DashboardPage() {
     const [users, setUsers] = useState([]);
     const token = localStorage.getItem('token');
 
+    const formatDateTime = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('fr-FR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    };
+
     let decoded = null;
         if (token) {
             try {
@@ -73,13 +84,18 @@ function DashboardPage() {
                 <h1>Tableau de bord</h1>
                 <p>Bienvenue sur votre espace personnel !</p>
                 <div className="reservations-list">
-                    <h2>Vos réservations</h2>
+                    <h2>Liste des réservations</h2>
                     {reservations.length > 0 ? (
                         <ul>
                             {reservations.filter(r => r.estSupprime !== 1).map(reservation => (
                                 <li key={reservation.reservation_id}>
-                                    <p>Jeu : {reservation.titre}</p>
-                                    <p>Date de réservation : {reservation.date_reservation}</p>
+                                    <p><strong>Id :</strong> {reservation.reservation_id}</p>
+                                    <p><strong>Utilisateur :</strong> {reservation.nom} {reservation.prenom} - <strong>Telephone :</strong> {reservation.telephone}</p>
+                                    <p><strong>Jeu :</strong> {reservation.titre}</p>
+                                    <p><strong>Localisation :</strong> {reservation.localisation}</p>
+                                    <p><strong>Créneau :</strong> {formatDateTime(reservation.creneau)}</p>
+                                    <p><strong>Date de réservation :</strong> {formatDateTime(reservation.date_reservation)}</p>
+                                    <p><strong>Statut</strong> {reservation.statut}</p>
                                     <button onClick={() => handleDeleteReservation(reservation.reservation_id)} className="delete-button">Supprimer</button>
                                 </li>
                             ))}
